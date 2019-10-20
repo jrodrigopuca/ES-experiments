@@ -17,6 +17,26 @@ const Robot = (props) =>(
                 </li>))
             }
         </ul>
+
+        <style jsx global>{`
+            ul{
+                padding:0;
+            }
+
+            li{
+                list-style:none;
+                margin:5px 0;
+            }
+
+            a {
+                text-decoration:none;
+                color:red;
+            }
+
+            a:hover{
+                opacity:0.6;
+            }
+        `}</style>
     </div>
 )
 

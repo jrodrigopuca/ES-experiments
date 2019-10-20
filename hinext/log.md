@@ -23,3 +23,7 @@
 - agrego páginas dinamicas con post.js 
 - agrego páginas dinamicas con 'clean urls' en "[id].js"
 - agrego 'isomorphic-unfetch' <code> yarn add 'isomorphic-unfetch'</code>
+
+## 10/19
+- agrego estilos
+- agrego AMP (amphyb, ampweb)
