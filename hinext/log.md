@@ -27,3 +27,6 @@
 ## 10/19
 - agrego estilos
 - agrego AMP (amphyb, ampweb)
+
+## 12/08
+- upgrade <code>yarn upgrade</code>
