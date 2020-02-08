@@ -147,3 +147,39 @@ function getNumbers2(){
 
 const funArray = getNumbers2();
 funArray[3](); //3
+
+//funciones de orden superior
+//map
+const w = [0,1,2,3];
+console.log('original',w)
+
+function addOne(n){return n+1};
+console.log(addOne(1)) //2 
+console.log("usando map:",w.map(addOne)); //[1,2,3,4]
+
+//filter
+function isGreaterThanOne(num){return num>1};
+console.log(isGreaterThanOne(100)) //true
+console.log("usando filter",w.filter(isGreaterThanOne));
+
+//reduce
+function sumar(x,y){return x+y}
+console.log("usando reduce: ",w.reduce(sumar));
+
+console.log("----")
+
+//callback
+function doSomething(callback){
+    callback("llamando a callback");
+}
+
+doSomething(console.log)
+
+//async: setTimeout(), xmlHttpRequest, jQuery.ajax, fetch(), Database calls
+function doSomethingAsync(callback){
+    setTimeout(function(){callback("llamando a callback");},1000)
+}
+
+doSomethingAsync(console.log)
+
+//01:46:41
