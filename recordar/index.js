@@ -101,4 +101,49 @@ function makeHello(){
 const hi = makeHello();
 hi();
 
-//1:47:31
+// iife clousure
+// función de ejecución inmediata
+const decirHola = (function(){
+    const msg= 'Hello 2';
+
+    function sayHello(){
+        console.log(msg);
+    }
+    return sayHello
+})();
+
+decirHola();
+
+//iife clousure
+// limitar scope sin necesidad de poner una variable en global
+const contador = (function(){
+    let contar=0;
+    return{
+        inc: function(){contar=contar+1}, 
+        get: function(){console.log(contar)},
+    }
+})()
+
+contador.get();
+contador.inc();
+contador.get();
+
+console.log("----")
+
+//iife clousure
+//carga un array de funciones, al llamar la función devuelve un número.
+//nota: en este caso se uso el var como en getNumbersVar()
+function getNumbers2(){
+    const arr=[];
+    for (var i=0; i<5; i++){
+        arr.push(
+            (function(x){
+                return function(){console.log(x)}
+            })(i)
+        )
+    }
+    return arr;
+}
+
+const funArray = getNumbers2();
+funArray[3](); //3
