@@ -12,7 +12,7 @@ const x = 42;
 const exp = String(x);  // "42"
 const imp = x + "";     // "42"
 
-// traer el tipo 
+// traer el tipo
 console.log(typeof imp); //string
 
 // formas de escribir objetos
@@ -54,15 +54,15 @@ function runThis() {
 
 /**
  *  Al definir algo como var queda como global
- * 
- * en consola de Chrome: 
+ *
+ * en consola de Chrome:
  * var y = "hola";
  * window.y //"hola"
- * 
- * en consola interactiva de nodeJS (node -i) 
+ *
+ * en consola interactiva de nodeJS (node -i)
  * var x= "Hola";
  * global.x //"Hola"
- * 
+ *
  */
 
 // Clousure: es una función que tiene acceso a variables que ya dejo atrás
@@ -154,7 +154,7 @@ const w = [0, 1, 2, 3];
 console.log('original', w)
 
 function addOne(n) { return n + 1 };
-console.log(addOne(1)) //2 
+console.log(addOne(1)) //2
 console.log("usando map:", w.map(addOne)); //[1,2,3,4]
 
 //filter
@@ -241,14 +241,14 @@ async function login(req, res, callback) {
             const payload = { id: user._id, email: user.email }
             const token= await jwt.sign(payload, config.secret, {})
         }
-    
+
         user.token = token
         const success= user.save()
         res.json({ token })
     }
     catch(err){
         callback(err)
-    }  
+    }
 }
 
 // asyn await simple
@@ -285,23 +285,16 @@ friend.greet();
 
 
 /**
- * 
+ *
  * bind: devuelve una función, permite enviar los argumentos en un array o cualquier número de argumentos
  * call: invoca la función inmediatamente, los argumentos deben enviarse uno x uno
  * apply: invoca la función inmediatamente, los argumentos deben enviarse en un array
- * 
+ *
  * Tiempos  | ejecución     |  binding
  * función  |   futuro      |   futuro
  * call     |   ahora       |   ahora
  * apply    |   ahora       |   ahora
  * bind     |   futuro      |   futuro
- * 
+ *
 */
-
-const greet = person.greet.bind({name:'Michael'})
-greet();
-person.greet.call({name:'Michael'})
-person.greet.apply({name:'Michael'})
-
-console.log("---")
 
