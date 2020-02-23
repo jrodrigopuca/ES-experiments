@@ -1,8 +1,4 @@
-/*
-let version=3;
-let remainderBits=[0,7,7,7,7,7,0,0,0,0,0,0,0,3,3,3,3,3,3,3,4,4,4,4,4,4,4,3,3,3,3,3,3,3,0,0,0,0,0,0,0]
-let remainderxVersion=remainderBits[version-1]; //esto es para agregar despues de codificar los errores
-*/
+
 
 function makeGroups(version, lvlCorrection, data) {
     let group1 = []
