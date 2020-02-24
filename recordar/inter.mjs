@@ -2,7 +2,7 @@ const interleave=(groups)=> {
     const group1 = Array.from(groups[0]);
     const group2 = Array.from(groups[1]);
     
-    const majLong = group1[0].length > group2[0].length ? group1[0].length : group2[0].length;
+    const majLong = group2.length==0 || group1[0].length > group2[0].length ? group1[0].length : group2[0].length;
     
     const ngroup = group1.concat(group2);
     let all = []; let value=null;

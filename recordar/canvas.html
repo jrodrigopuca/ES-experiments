@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <canvas id="canvas" height="300", width="300"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        
+        function QR(dimension){
+            this.w= dimension;
+            this.h=dimension;
+            this.board=[];
+
+            for (let i=0; i<this.w; i++){
+                const row = [];
+                this.board.push(row);
+                for (let j=0; j<this.h; j++){
+                    const col= {};
+                    row.push(col);
+                }
+            }
+            console.log(this.board);
+        }
+
+        QR.prototype.draw= function(){
+            for (let i=0; i<this.w; i++){
+                for (let j=0; j<this.h; j++){
+                    ctx.beginPath();
+                    ctx.strokeStyle="gray";
+                    ctx.strokeRect(i * 20, j * 20, 20, 20);
+                    console.log(i,j)
+                }
+            }
+            ctx.closePath();
+        }
+
+        let myQR=new QR(21);
+        myQR.draw();
+    </script>
+</body>
+
+</html>

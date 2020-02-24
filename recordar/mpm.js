@@ -6,6 +6,8 @@ function darkModule(version){
     return [((version*4)+9),8]
 }
 
+//console.log(sizeQR(1));
+//console.log(darkModule(1))
 
 // sizeQR(32)   145
 /**
