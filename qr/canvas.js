@@ -34,6 +34,7 @@ function QR(version) {
 QR.prototype.change= function (){
     const alignLocation=[[6,18],[6,22],[6,26],[6,30],[6,34],[6, 22, 38],[6, 24, 42],[6,	26,	46],[6,	28,	50],[6,	30,	54],[6,	32,	58],[6,	34,	62],[6,	26,	46,	66],[6,	26,	48,	70],[6,	26,	50,	74],[6,	30,	54,	78],[6,	30,	56,	82],[6,	30,	58,	86],[6,	34,	62,	90],[6,	28,	50,	72,	94],[6,	26,	50,	74,	98],[6,	30,	54,	78,	102],[6,	28,	54,	80,	106],[6,	32,	58,	84,	110],[6,	30,	58,	86,	114],[6,	34,	62,	90,	118],[6,	26,	50,	74,	98,	122],[6,	30,	54,	78,	102,	126],[6,	26,	52,	78,	104,	130],[6,	30,	56,	82,	108,	134],[6,	34,	60,	86,	112,	138],[6,	30,	58,	86,	114,	142],[6,	34,	62,	90,	118,	146],[6,	30,	54,	78,	102,	126,	150],[6,	24,	50,	76,	102,	128,	154],[6,	28,	54,	80,	106,	132,	158],[6,	32,	58,	84,	110,	136,	162],[6,	26,	54,	82,	110,	138,	166],[6,	30,	58,	86,	114,	142,	170]]
 
+    // modulo dark
     const darkPoint=darkModule(this.version);
     this.board[darkPoint[0]][darkPoint[1]]=1;
 
@@ -45,18 +46,32 @@ QR.prototype.change= function (){
         this.board[i][6]=1;
         this.board[0][i]=1;
         this.board[6][i]=1;
+        // separador arriba izq
+        this.board[i][7]=2;
+        this.board[7][i]=2;
+        this.board[7][7]=2;
+
         // cuadrado abajo izq 
         this.board[this.d-1-i][0]=1;
         this.board[this.d-1-i][6]=1;
         this.board[this.d-7][i]=1;
         this.board[this.d-1][i]=1;
+        // separador abajo izq
+        this.board[this.d-1-i][7]=2;
+        this.board[this.d-8][i]=2;
+        this.board[this.d-8][7]=2;
+
         // cuadrado arriba der
         this.board[i][this.d-7]=1;
         this.board[i][this.d-1]=1;       
         this.board[0][this.d-1-i]=1;
         this.board[6][this.d-1-i]=1;
-        
+        // separador arriba der
+        this.board[i][this.d-8]=2;
+        this.board[7][this.d-1-i]=2;
+        this.board[7][this.d-8]=2;
 
+        // cuadrados 3x3
         if(i>1 && i<5){
             // cuadrado arriba izq (3x3)
             this.board[2][i]=1;
@@ -74,11 +89,28 @@ QR.prototype.change= function (){
         }
     }
 
+    //información de area
+    if (this.version<7){
+        for (let i=0; i<9; i++){
+            // información de area (arriba izq)
+            this.board[i][8]=3;
+            this.board[8][i]=3;
+            // información de area (abajo izq)
+            if (this.board[this.d-1-i][8]!=1) {this.board[this.d-1-i][8]=3;}
+            this.board[this.d-9][i]=3;
+            // información de area (arriba der)
+            this.board[i][this.d-9]=3;
+            this.board[8][this.d-1-i]=3;
+        }
+    }
+
+    // patrones de sincronización
     for (let i=0;i<this.d; i=i+2){
         this.board[6][i]=1;
         this.board[i][6]=1;
     }
 
+    // patrón de alineación
     if (this.version>=2){
         let pointsA=alignLocation[this.version-2];
         console.log(pointsA);
@@ -106,10 +138,7 @@ QR.prototype.change= function (){
                 
             }
         }
-
-        console.log("haz algo")
-
-        
+        console.log("haz algo")       
     }
 
 
@@ -122,7 +151,7 @@ QR.prototype.draw = function () {
         for (let j = 0; j < this.h; j++) {
             ctx.beginPath();
             ctx.rect(j * sizeRect, i * sizeRect, sizeRect, sizeRect);
-            ctx.fillStyle = this.board[i][j]===0?"white":"black";
+            ctx.fillStyle = this.board[i][j]===1?"black":"white";
             ctx.fill();
             ctx.lineWidth = .3;
             ctx.strokeStyle = "black";
@@ -134,5 +163,5 @@ QR.prototype.draw = function () {
     
 }
 
-let myQR = new QR(3);
+let myQR = new QR(9);
 myQR.draw();
