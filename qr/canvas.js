@@ -141,6 +141,118 @@ QR.prototype.change= function (){
         console.log("haz algo")       
     }
 
+    this.loadData();
+}
+
+function cycle(v, x,y){
+    let blocked1=false;
+    let blocked2=true;
+    let blocked3=true;
+    let blocked4=true;
+    const max=x;
+    v[x][y]=4;
+    while (!blocked1){
+        v[x][y-1]=4; //izq
+        if (v[x-1][y]!=0){
+            y=y-2;
+            blocked1=true;
+            blocked2=false;
+            break;
+        }
+        else{
+            v[x-1][y]=4;
+            x=x-1;
+        }
+    }
+    v[x][y]=4;
+    while(!blocked2){
+
+        v[x][y-1]=4; //izq
+    
+        if (x+1>max || v[x+1][y]!==0){
+            //console.log(x,y)
+            y=y-2
+            blocked2=true;
+            blocked3=false;
+            break;
+        }
+        else{
+            v[x+1][y]=4;
+            x=x+1;
+        }
+    }
+    v[x][y]=4;
+    while (!blocked3){
+        v[x][y-1]=4; //izq
+        if (v[x-1][y]!=0){
+            if (v[x-1][y]==1){
+                x=x-6;
+                v[x][y]=4;
+            }
+            else{
+                y=y-2;
+                blocked3=true;
+                blocked4=false;
+                break;
+            }
+        }
+        else{
+            v[x-1][y]=4;
+            x=x-1;
+        }
+    }
+
+    v[x][y]=4;
+    while(!blocked4){
+        console.log(x,y);
+        v[x][y-1]=4; //izq
+
+        if (x+1>max){
+            y=y-2
+            
+            blocked4=true;
+            break;
+        }
+    
+        if (v[x+1][y]!==0){
+            if (v[x-1][y]==1){
+                y=y-6;
+                v[x][y]=4;
+            }
+            else{
+                y=y-2
+                console.log("max")
+                blocked4=true;
+                break;
+            }
+
+        }
+        else{
+            v[x+1][y]=4;
+            x=x+1;
+        }
+    }
+
+
+
+}
+
+QR.prototype.loadData= function (){
+    cycle(this.board, this.d-1, this.d-1);
+    //this.board[this.d-1][this.d-1]=1;
+}
+QR.prototype.getColor= function(number){
+    let value=null;
+    switch (number){
+        case 0: value= "white"; break;
+        case 1: value= "black";break;
+        case 2: value="red";break;
+        case 3: value="blue";break;
+        case 4: value="gray";break;
+        default: value="white";
+    }
+
+    return value;
 
 }
 
@@ -151,7 +263,8 @@ QR.prototype.draw = function () {
         for (let j = 0; j < this.h; j++) {
             ctx.beginPath();
             ctx.rect(j * sizeRect, i * sizeRect, sizeRect, sizeRect);
-            ctx.fillStyle = this.board[i][j]===1?"black":"white";
+            ctx.fillStyle = this.getColor(this.board[i][j])
+            //this.board[i][j]===1?"black":"white";
             ctx.fill();
             ctx.lineWidth = .3;
             ctx.strokeStyle = "black";
@@ -163,5 +276,5 @@ QR.prototype.draw = function () {
     
 }
 
-let myQR = new QR(9);
+let myQR = new QR(2);
 myQR.draw();

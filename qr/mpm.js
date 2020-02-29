@@ -33,3 +33,19 @@ function darkModule(version){
  * https://www.thonky.com/qr-code-tutorial/mask-patterns
  */
 
+/**
+ * 
+ * row, col
+ * org           (29,29)
+ * izq (29,29-1) (29.28)
+ * arr (29-1,29) (28,29)
+ * izq (28,29-1) (28,28)
+ * arr ()
+ */
+
+
+function cycle01(v,x,y){
+    const izq= v[x,y-1];
+    const arr=v[x-1,y];
+}
+
