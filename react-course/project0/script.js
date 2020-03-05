@@ -24,9 +24,10 @@ function newTodo() {
   const listItem = document.createElement("li");
   listItem.className=classNames.TODO_ITEM;
   
+  const text=prompt("text please!");
   const content = `
   <div>
-    <span class="todo-text"> text </span>
+    <span class="todo-text"> ${text} </span>
     <input type="checkbox" class="todo-checkbox"/>
     <button class="todo-delete">delete</button>
   </div>`;

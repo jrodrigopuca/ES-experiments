@@ -26,7 +26,12 @@ new TODOs.
 
 Good luck!
 
-## Challenge! (Not Required)
+## Challenge 
+[script2.js](/script2.js)
 If you finish early and are up for a challenge, try adding delete functionality.
 This should be in the form of a button within each TODO that removes that TODO
 when clicked. 
+
+## Using React JS
+- HTML: [index-react.html](/index-react.html)
+- Script: [script3.js](/script3.js)
