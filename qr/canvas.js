@@ -287,7 +287,7 @@ QR.prototype.mask = function () {
 
 QR.prototype.getColor = function (number) {
     let value = null;
-    /*
+    
     switch (number) {
         case 0: value = "white"; break;
         case 1: value = "black"; break;
@@ -296,8 +296,8 @@ QR.prototype.getColor = function (number) {
         case 4: value = "gray"; break;//"gray"; patrones
         default: value = "white";
     }
-    */
     
+    /*
     switch (number) {
         case 0: value = "white"; break;
         case 1: value = "black"; break;
@@ -305,7 +305,7 @@ QR.prototype.getColor = function (number) {
         case 3: value = "white"; break; //información
         case 4: value = "black"; break;//"gray"; patrones
         default: value = "white";
-    }
+    }*/
     
     return value;
 
@@ -330,5 +330,5 @@ QR.prototype.draw = function () {
 
 }
 
-let myQR = new QR(1);
+let myQR = new QR(5);
 myQR.draw();
