@@ -21,7 +21,18 @@
 - Para longitudes se utilizan números (no se especifica px u otras unidades)
 - propiedad de estilo puede tomar un array de estilos
 - ```style={{}}``` significa que uso Javascript y dentro voy a usar un objeto.
+- Se puede usar Stylesheet.create(): crea un bridge entre JS y la UI
+    - Funcionalmente es lo mismo que crear objetos de estilos
+    - Optimización: envia solo IDs sobre el bridge
 
+## Eventos
+- No es como web, no cada componente tiene cada interacción.
+- Solo hay pocos componentes presionables o 'clickables'
+    - Button
+    - TouchableOpacity, TouchableHighlight, TouchableWithouthFeedback
+    - TouchableNativeFeedback (Android only)
+- En web los eventos reciben un argumento, pero en RN pueden recibir diferentes argumentos
+    - Consultar la documentación
 
 
 

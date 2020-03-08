@@ -5,7 +5,6 @@ import Constants from 'expo-constants';
 // You can import from local files
 import AssetExample from './components/AssetExample';
 
-// or any pure javascript modules available in npm
 /**
  * Script: bloquea el Javascript (crea un ciclo que lo bloquea)
  * la UI se mantiene funcional. Esto sucede porque trabajan en 
