@@ -4,6 +4,13 @@
     - hilo de JS pedirá que los elementos de UI se muestren
     - hilo de Javascript puede ser bloqueado y la UI continuará funcionando
 ## Componentes 
+- retornar un nodo (algo puedes renderizar)
+- representan un lugar de la UI
+- todos los React component debería actuar como funciones puras con respecto a sus props
+- Dos tipos: 
+    - Stateless Functional Components ó Component funcional sin estado (SPC) también conocidos como Pure Functional Component. Son basicamente funciones que toman props y devuelven algún nodo, sin usar estados, no deberían modificar nada.
+    - React.Component: es algo provisto por la librería de React e implementado por nosotros
+
 - para cada componente se deberá incorporar desde import
 - Modificaciones de web a mobile:
     - div   --> View
@@ -34,6 +41,21 @@
 - En web los eventos reciben un argumento, pero en RN pueden recibir diferentes argumentos
     - Consultar la documentación
 
+## React.Component 
+- Una clase abstracta que se puede extender para compartarse como quieras
+- Tiene caracteristicas adicionales que las SFCs no tiene:
+    - Mantener su propio estado
+    - Tener instancia
+    - Tener métodos de ciclo de vida
+- cuando se crea una instancia se puede utilizar las propiedades de la clase y los props para renderizar algo. 
+
+## Ciclo de vida
+- Mount: Primero se monta el componente 
+    - constructor(props): inicializa el estado u otras propiedades de la clase
+    - render: regresa el nodo
+    - componentDidMound(): Hacer algo que no sea necesario para la UI: acciones asincrónicas, timers, etc. Cambiar el estado aqui hará que se re-renderiza antes de actualizar la UI.
+- Update: renderizar, esto sucede cuando se recibe nuevos props o se cambia el estado
+- Unmount: cuando el componente necesita desaparecer o desmontarse. 
 
 
     
