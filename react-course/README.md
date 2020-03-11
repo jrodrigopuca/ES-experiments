@@ -11,3 +11,6 @@
     - rn02: ToDO en React Native (en base a lo realizado en project0)
     - rn03: rn02 con estilos
     - rn04: rn03 con Switch, estilos en array
+    - rn05: Ciclo de vida - Mount: contador
+    - rn06: Ciclo de vida - Update: contador de pares
+    - rn07: Ciclo de vida - UnMount: Limpiar timers

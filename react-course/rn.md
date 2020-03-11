@@ -55,7 +55,24 @@
     - render: regresa el nodo
     - componentDidMound(): Hacer algo que no sea necesario para la UI: acciones asincrónicas, timers, etc. Cambiar el estado aqui hará que se re-renderiza antes de actualizar la UI.
 - Update: renderizar, esto sucede cuando se recibe nuevos props o se cambia el estado
+    - componentWillReceiveProps(nextProps): Actualiza cualquier estado que dependa de los props
+    - shouldComponentUpdate(nextProps, nextState): compara los valores cambiados, regresa true si el componente debe renderizar, si retorna false el ciclo de update termina.
+    - render()
+    - componentDidUpdate(prevProps, prevState): haz algo que no necesita de la UI (solicitud de red)
 - Unmount: cuando el componente necesita desaparecer o desmontarse. 
+    - componentWillUnmount(): limpia (elimina eventos listeners, invalida solitud de red, limpia timers)
 
-
-    
+## Expo 
+- la forma más rápida de crear una app
+- Conjunto de herramientas para acelerar el proceso de desarrollo con RN
+    - snack: corre RN en el navegador
+    - XDE: una GUI para compartir y publicar proyectos de Expo
+    - CLI: una interfaz de linea de comando para servir, compartir y publicar proyectos
+    - cliente: corre tus proyectos sobre tu telefono mientras desarrollas.
+    - SDK: agrupa y brinda bibliotecas multiplaformas y APIs
+## CLI 
+```
+$ expo init . --template bare-minimum --yarn
+$ export EXPO_DEBUG=true
+$ yarn web
+``` 
