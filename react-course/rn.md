@@ -73,6 +73,35 @@
 ## CLI 
 ```
 $ expo init . --template bare-minimum --yarn
-$ export EXPO_DEBUG=true
-$ yarn web
+$ yarn start
 ``` 
+
+## Export/Import
+- Los componentes son excelentes para simplificar código
+- Nosotros podemos dividir componentes en sus propios archivos
+    - Ayuda a organizar el proyecto.
+    - Exportar el componente que queramos desde una sola línea
+- Importar el componente si queremos usarlo
+- Default vs import/export con nombre: Al importar por nombre es necesario usar las llaves, cuando es por default no es necesario.
+
+```
+    // import-export con nombre
+    export const Count = ()=>{..}
+    import {Count} from './Count.js'
+
+    // import-export default
+    export default Count;
+    import Count from './Count.js'
+
+    // import-export default (también puedo cambiar el nombre en el import)
+    export default Count;
+    import CountApp from './Count.js' //CountApp hace referencia a Count
+
+    //mezclar las dos opciones
+    export const num =50;
+    export default Count;
+    import CountApp, {num} from './Count.js'  
+```
+
+
+
