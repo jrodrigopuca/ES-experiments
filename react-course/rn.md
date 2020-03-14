@@ -103,5 +103,27 @@ $ yarn start
     import CountApp, {num} from './Count.js'  
 ```
 
+## PropTypes
+- Permite que React valide los tipos de props en los componentes en tiempo de ejecución
+- Es una herramienta que permite a los desarrolladores asegurarse que ellos están pasando los props correctamente.
+- Ayuda a documentar el acceso a tus componentes
+- Solo corre durante el desarrollo
+- En clases la convención es usarlo a PropTypes dentro como un estático:
+```
+export default class C01 extends React.Component{
+    static propTypes={count:PropTypes.number.isRequired}
+    ...
+    
+    }
+```
+
+## Leer documentación
+- Tener un objetivo en mente: Se necesita saber qué problema está tratando de resolver
+- Ver lo que la librería/framework/API ofrece
+- Encontrar algo que solucione tu problema
+- Configurar usando el API 
+
+
+
 
 

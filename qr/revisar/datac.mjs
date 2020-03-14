@@ -53,7 +53,8 @@ function makeData(version, lvlCorrection, mode, text) {
     }
 
     //modo + longitud
-    let words = complete(mode, 4) + complete(text.length, bLength);
+    //let words = complete(mode, 4) + complete(text.length, bLength);
+    let words="";
 
     // Texto codificado
     for (let i = 0; i < text.length; i++) {

@@ -5,9 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node index",
-    "erc": "node --experimental-modules erc.mjs",
-    "final":"node --experimental-modules final.mjs",
-    "all":"node --experimental-modules all.mjs"
+    "all":"node --experimental-modules ./index.mjs"
   },
   "dependencies": {}
 }
