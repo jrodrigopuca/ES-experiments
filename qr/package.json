@@ -4,8 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index",
-    "all":"node --experimental-modules ./index.mjs"
+    "start": "tsc | node dist/qr.js"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "typescript": "^3.8.3"
+  }
 }
