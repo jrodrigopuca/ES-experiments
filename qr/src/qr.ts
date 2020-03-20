@@ -5,12 +5,20 @@ class QR {
     mode: number;
     ccm: number;
     capacity: any;
+    
     constructor(text:string, version:number, lvlCorrection:string) {
         this.text = text;
         this.version = version;
         this.lvlCorrection = lvlCorrection;
         this.mode = 0b0100;
         this.ccm = 0; //character count mode
+    }
+
+    complete(original:number, nZeros:number){
+        let zeros = '0';
+        zeros = zeros.padStart(nZeros, '0');
+        let newText = original.toString(2);
+        return zeros.substr(newText.length) + newText;
     }
 
     firstPart(){
@@ -27,11 +35,16 @@ class QR {
         } else {
             alert("fuera de rango");
         }
-        return ("hola");
+        return {"capacity":this.capacity,"ccm":this.ccm};
     }
 
 
     msgEncoding(){
+        let msgCod=[];
+        for (let i=0; i<this.text.length; i++){
+            msgCod.push(this.text.charCodeAt(i).toString(2));
+        }
+        return msgCod;
     }
     
     errorEncoding(){
@@ -42,5 +55,6 @@ class QR {
 
 }
 
-let qr = new QR("www.wikipedia.org", 1, "Q")
+let qr = new QR("Hello world!", 1, "Q")
 console.log(qr.firstPart());
+console.log("mensaje: ",qr.msgEncoding())
