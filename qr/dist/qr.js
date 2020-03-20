@@ -35,7 +35,7 @@ var QR = /** @class */ (function () {
     QR.prototype.msgEncoding = function () {
         var msgCod = [];
         for (var i = 0; i < this.text.length; i++) {
-            msgCod.push(this.text.charCodeAt(i).toString(2));
+            msgCod.push(this.complete(this.text.charCodeAt(i).toString(2), this.ccm));
         }
         return msgCod;
     };
