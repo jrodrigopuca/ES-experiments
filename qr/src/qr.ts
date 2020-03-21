@@ -173,22 +173,74 @@ class QR {
         return [group1, group2];
     }
 
-    errorEncoding(){
-        let [group1, group2] =this.makeGroups(this.dataEncoding());
+    errorEncoding(group1:any[], group2:any[]){
+        //let [group1, group2] =this.makeGroups(this.dataEncoding());
         
         let correction1=group1.map(val=>this.getCorrection(val))
         let correction2=group2.map(val=>this.getCorrection(val))
 
         return [correction1, correction2];
     }
+
+    // Final Structure 
+
+    interleave(group1:any[], group2:any[]){
+        const majLong = group2.length==0 || group1[0].length > group2[0].length ? group1[0].length : group2[0].length;
+        
+        const ngroup = group1.concat(group2);
+        let all = []; let value=null;
+    
+        for (let j = 0; j < majLong; j++) {
+            for (let i = 0; i < ngroup.length; i++) {
+                value = ngroup[i][j];
+                if (value !== undefined) { all.push(value) }
+            }
+        }
+        return all;
+    }
+
+    getFinalForm(){
+        const [dataG1,dataG2] = this.makeGroups(this.dataEncoding());
+        const [errorG1, errorG2]=this.errorEncoding(dataG1,dataG2);
+        const interData = this.interleave(dataG1,dataG2);
+        //console.log("interData", interData);
+        const interError= this.interleave(errorG1,errorG2);
+        //console.log("interError", interError);
+
+        const interJoin= interData.concat(interError);
+        //console.log(interJoin)
+
+        let bits = interJoin.map((v)=>v.toString(2))
+        bits = bits.map((v)=>this.complete(v,8))
+        //console.log(bits);
+
+        const remainderBits=[0,7,7,7,7,7,0,0,0,0,0,0,0,3,3,3,3,3,3,3,4,4,4,4,4,4,4,3,3,3,3,3,3,3,0,0,0,0,0,0,0]
+        const remainderxVersion=remainderBits[this.version-1]; 
+        let bitzero="0";
+
+        return (bits.join('')+bitzero.repeat(remainderxVersion));
+    }
+
     formatInfo(){
+
     }
 
 }
 
-let qr = new QR("There/'s a frood who really knows where his towel is!", 5, "Q")
+let qr = new QR(`There\\'s a frood who really knows where his towel is!`, 5, "Q")
 //console.log("modo+cci",qr.firstPart());
 //console.log("mensaje: ",qr.msgEncoding())
 //console.log("data coding", qr.dataEncoding());
 //console.log("data groups", qr.makeGroups(qr.dataEncoding()))
-console.log("errors",qr.errorEncoding())
+/*let arr= 
+[[[67,85,70,134,87,38,85,194,119,50,6,18,6,103,38],
+[246,246,66,7,118,134,242,7,38,86,22,198,199,146,6]],
+[[182,230,247,119,50,7,118,134,87,38,82,6,134,151,50,7],
+[70,247,118,86,194,6,151,50,16,236,17,236,17,236,17,236]]];
+
+console.log("error_test", qr.errorEncoding(arr));
+*/
+
+console.log(qr.getFinalForm());
+
+
