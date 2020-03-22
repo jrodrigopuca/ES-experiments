@@ -192,11 +192,8 @@ QR.prototype.change = function () {
         }
     }
 
-    this.loadData();
+    //this.loadData();
 }
-
-
-
 
 QR.prototype.loadData = function () {
 

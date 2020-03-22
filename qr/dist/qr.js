@@ -15,6 +15,16 @@ var QR = /** @class */ (function () {
         this.antilog = [1, 2, 4, 8, 16, 32, 64, 128, 29, 58, 116, 232, 205, 135, 19, 38, 76, 152, 45, 90, 180, 117, 234, 201, 143, 3, 6, 12, 24, 48, 96, 192, 157, 39, 78, 156, 37, 74, 148, 53, 106, 212, 181, 119, 238, 193, 159, 35, 70, 140, 5, 10, 20, 40, 80, 160, 93, 186, 105, 210, 185, 111, 222, 161, 95, 190, 97, 194, 153, 47, 94, 188, 101, 202, 137, 15, 30, 60, 120, 240, 253, 231, 211, 187, 107, 214, 177, 127, 254, 225, 223, 163, 91, 182, 113, 226, 217, 175, 67, 134, 17, 34, 68, 136, 13, 26, 52, 104, 208, 189, 103, 206, 129, 31, 62, 124, 248, 237, 199, 147, 59, 118, 236, 197, 151, 51, 102, 204, 133, 23, 46, 92, 184, 109, 218, 169, 79, 158, 33, 66, 132, 21, 42, 84, 168, 77, 154, 41, 82, 164, 85, 170, 73, 146, 57, 114, 228, 213, 183, 115, 230, 209, 191, 99, 198, 145, 63, 126, 252, 229, 215, 179, 123, 246, 241, 255, 227, 219, 171, 75, 150, 49, 98, 196, 149, 55, 110, 220, 165, 87, 174, 65, 130, 25, 50, 100, 200, 141, 7, 14, 28, 56, 112, 224, 221, 167, 83, 166, 81, 162, 89, 178, 121, 242, 249, 239, 195, 155, 43, 86, 172, 69, 138, 9, 18, 36, 72, 144, 61, 122, 244, 245, 247, 243, 251, 235, 203, 139, 11, 22, 44, 88, 176, 125, 250, 233, 207, 131, 27, 54, 108, 216, 173, 71, 142, 1];
         var listECCxB = [{ "L": 7, "M": 10, "Q": 13, "H": 17 }, { "L": 10, "M": 16, "Q": 22, "H": 28 }, { "L": 15, "M": 26, "Q": 18, "H": 22 }, { "L": 20, "M": 18, "Q": 26, "H": 16 }, { "L": 26, "M": 24, "Q": 18, "H": 22 }, { "L": 18, "M": 16, "Q": 24, "H": 28 }, { "L": 20, "M": 18, "Q": 18, "H": 26 }, { "L": 24, "M": 22, "Q": 22, "H": 26 }, { "L": 30, "M": 22, "Q": 20, "H": 24 }, { "L": 18, "M": 26, "Q": 24, "H": 28 }, { "L": 20, "M": 30, "Q": 28, "H": 24 }, { "L": 24, "M": 22, "Q": 26, "H": 28 }, { "L": 26, "M": 22, "Q": 24, "H": 22 }, { "L": 30, "M": 24, "Q": 20, "H": 24 }, { "L": 22, "M": 24, "Q": 30, "H": 24 }, { "L": 24, "M": 28, "Q": 24, "H": 30 }, { "L": 28, "M": 28, "Q": 28, "H": 28 }, { "L": 30, "M": 26, "Q": 28, "H": 28 }, { "L": 28, "M": 26, "Q": 26, "H": 26 }, { "L": 28, "M": 26, "Q": 30, "H": 28 }, { "L": 28, "M": 26, "Q": 28, "H": 30 }, { "L": 28, "M": 28, "Q": 30, "H": 24 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 26, "M": 28, "Q": 30, "H": 30 }, { "L": 28, "M": 28, "Q": 28, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }, { "L": 30, "M": 28, "Q": 30, "H": 30 }];
         this.ecc = listECCxB[this.version - 1][this.lvlCorrection];
+        this.d = ((this.version - 1) * 4) + 21;
+        this.board = [];
+        for (var i = 0; i < this.d; i++) {
+            var row = [];
+            this.board.push(row);
+            for (var j = 0; j < this.d; j++) {
+                var col = 0;
+                row.push(col);
+            }
+        }
     }
     QR.prototype.complete = function (original, nZeros) {
         var zeros = '0';
@@ -156,33 +166,325 @@ var QR = /** @class */ (function () {
         }
         return [group1, group2];
     };
-    QR.prototype.errorEncoding = function () {
+    QR.prototype.errorEncoding = function (group1, group2) {
+        //let [group1, group2] =this.makeGroups(this.dataEncoding());
         var _this = this;
-        var _a = this.makeGroups(this.dataEncoding()), group1 = _a[0], group2 = _a[1];
         var correction1 = group1.map(function (val) { return _this.getCorrection(val); });
         var correction2 = group2.map(function (val) { return _this.getCorrection(val); });
         return [correction1, correction2];
     };
-    QR.prototype.errorEncodingTest = function (group) {
+    // Final Structure 
+    QR.prototype.interleave = function (group1, group2) {
+        var majLong = group2.length == 0 || group1[0].length > group2[0].length ? group1[0].length : group2[0].length;
+        var ngroup = group1.concat(group2);
+        var all = [];
+        var value = null;
+        for (var j = 0; j < majLong; j++) {
+            for (var i = 0; i < ngroup.length; i++) {
+                value = ngroup[i][j];
+                if (value !== undefined) {
+                    all.push(value);
+                }
+            }
+        }
+        return all;
+    };
+    QR.prototype.getFinalForm = function () {
         var _this = this;
-        var group1 = group[0];
-        var group2 = group[1];
-        var correction1 = group1.map(function (val) { return _this.getCorrection(val); });
-        var correction2 = group2.map(function (val) { return _this.getCorrection(val); });
-        return [correction1, correction2];
+        var _a = this.makeGroups(this.dataEncoding()), dataG1 = _a[0], dataG2 = _a[1];
+        var _b = this.errorEncoding(dataG1, dataG2), errorG1 = _b[0], errorG2 = _b[1];
+        var interData = this.interleave(dataG1, dataG2);
+        //console.log("interData", interData);
+        var interError = this.interleave(errorG1, errorG2);
+        //console.log("interError", interError);
+        var interJoin = interData.concat(interError);
+        //console.log(interJoin)
+        var bits = interJoin.map(function (v) { return v.toString(2); });
+        bits = bits.map(function (v) { return _this.complete(v, 8); });
+        //console.log(bits);
+        var remainderBits = [0, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0];
+        var remainderxVersion = remainderBits[this.version - 1];
+        var bitzero = "0";
+        //console.log(bits.join('') + bitzero.repeat(remainderxVersion));
+        return (bits.join('') + bitzero.repeat(remainderxVersion));
+    };
+    // draw
+    QR.prototype.getColor = function (n) {
+        var value = null;
+        switch (n) {
+            case 0:
+                value = "white";
+                break;
+            case 1:
+                value = "black";
+                break;
+            case 2:
+                value = "antiquewhite";
+                break; //  espacios en blanco de patrones
+            case 3:
+                value = "lightskyblue";
+                break; //información
+            case 4:
+                value = "gray";
+                break; //"gray"; patrones
+            default: value = "white";
+        }
+        return value;
+    };
+    QR.prototype.draw = function (ctx) {
+        var sizeRect = ctx.canvas.width / this.d;
+        for (var i = 0; i < this.d; i++) {
+            for (var j = 0; j < this.d; j++) {
+                ctx.beginPath();
+                ctx.rect(j * sizeRect, i * sizeRect, sizeRect, sizeRect);
+                ctx.fillStyle = this.getColor(this.board[i][j]);
+                //this.board[i][j]===1?"black":"white";
+                ctx.fill();
+                ctx.lineWidth = .3;
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+                ctx.closePath();
+            }
+        }
+    };
+    // add Function Patterns
+    QR.prototype.addPatterns = function () {
+        var alignLocation = [[6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]];
+        /** Patrón de búsqueda */
+        for (var i = 0; i < 7; i++) {
+            //[row,col]
+            // cuadrado arriba izq 
+            this.board[i][0] = 4;
+            this.board[i][6] = 4;
+            this.board[0][i] = 4;
+            this.board[6][i] = 4;
+            // separador arriba izq
+            this.board[i][7] = 2;
+            this.board[7][i] = 2;
+            this.board[7][7] = 2;
+            // cuadrado abajo izq 
+            this.board[this.d - 1 - i][0] = 4;
+            this.board[this.d - 1 - i][6] = 4;
+            this.board[this.d - 7][i] = 4;
+            this.board[this.d - 1][i] = 4;
+            // separador abajo izq
+            this.board[this.d - 1 - i][7] = 2;
+            this.board[this.d - 8][i] = 2;
+            this.board[this.d - 8][7] = 2;
+            // cuadrado arriba der
+            this.board[i][this.d - 7] = 4;
+            this.board[i][this.d - 1] = 4;
+            this.board[0][this.d - 1 - i] = 4;
+            this.board[6][this.d - 1 - i] = 4;
+            // separador arriba der
+            this.board[i][this.d - 8] = 2;
+            this.board[7][this.d - 1 - i] = 2;
+            this.board[7][this.d - 8] = 2;
+            // cuadrados 3x3
+            if (i > 1 && i < 5) {
+                // cuadrado arriba izq (3x3)
+                this.board[2][i] = 4;
+                this.board[3][i] = 4;
+                this.board[4][i] = 4;
+                // cuadrado abajo izq (3x3)
+                this.board[this.d - 5][i] = 4;
+                this.board[this.d - 4][i] = 4;
+                this.board[this.d - 3][i] = 4;
+                // cuadrado arriba der (3x3)
+                this.board[2][this.d - 1 - i] = 4;
+                this.board[3][this.d - 1 - i] = 4;
+                this.board[4][this.d - 1 - i] = 4;
+            }
+            //cuadrados blanco 4x4
+            if (i > 0 && i < 6) {
+                // arriba izq
+                this.board[i][1] = 2;
+                this.board[i][5] = 2;
+                this.board[1][i] = 2;
+                this.board[5][i] = 2;
+                // abajo izq
+                this.board[this.d - 1 - i][1] = 2;
+                this.board[this.d - 1 - i][5] = 2;
+                this.board[this.d - 6][i] = 2;
+                this.board[this.d - 2][i] = 2;
+                // arriba der
+                this.board[i][this.d - 6] = 2;
+                this.board[i][this.d - 2] = 2;
+                this.board[1][this.d - 1 - i] = 2;
+                this.board[5][this.d - 1 - i] = 2;
+            }
+        }
+        // modulo dark
+        this.board[(this.version * 4) + 9][8] = 4;
+        // patrón de alineación
+        if (this.version >= 2) {
+            var pointsA = alignLocation[this.version - 2];
+            console.log(pointsA);
+            for (var i = 0; i < pointsA.length; i++) {
+                for (var j = 0; j < pointsA.length; j++) {
+                    if (this.board[pointsA[i]][pointsA[j]] == 0) {
+                        this.board[pointsA[i]][pointsA[j]] = 4;
+                        var poi = pointsA[i];
+                        var poj = pointsA[j];
+                        //lineas horizontales cuadrado 5x5
+                        for (var k = poj - 2; k < poj + 3; k++) {
+                            this.board[poi - 2][k] = 4;
+                            this.board[poi + 2][k] = 4;
+                            if (k > poj - 2 && k < poj + 2) {
+                                this.board[poi - 1][k] = 2;
+                                this.board[poi + 1][k] = 2;
+                            }
+                        }
+                        for (var k = poi - 2; k < poi + 3; k++) {
+                            //lineas verticales cuadrado 5x5
+                            this.board[k][poj - 2] = 4;
+                            this.board[k][poj + 2] = 4;
+                            //lineas verticales cuadrado blanco 3x3
+                            if (k > poi - 2 && k < poi + 2) {
+                                this.board[k][poj - 1] = 2;
+                                this.board[k][poj + 1] = 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // patrones de sincronización
+        for (var i = 7; i < this.d - 7; i++) {
+            if (i % 2 === 0) {
+                this.board[6][i] = 4;
+                this.board[i][6] = 4;
+            }
+            else {
+                this.board[6][i] = 2;
+                this.board[i][6] = 2;
+            }
+        }
+        //información de area
+        if (this.version < 7) {
+            for (var i = 0; i < 8; i++) {
+                // información de area (arriba izq)
+                if (i != 6) {
+                    this.board[i][8] = 3;
+                    this.board[8][i] = 3;
+                    this.board[8][8] = 3;
+                }
+                // información de area (abajo izq)
+                if (this.board[this.d - 1 - i][8] != 4) {
+                    this.board[this.d - 1 - i][8] = 3;
+                }
+                // información de area (arriba der)
+                this.board[8][this.d - 1 - i] = 3;
+            }
+        }
+        else {
+            for (var i = 0; i < 6; i++) {
+                this.board[this.d - 9][i] = 3;
+                this.board[this.d - 10][i] = 3;
+                this.board[this.d - 11][i] = 3;
+                this.board[i][this.d - 9] = 3;
+                this.board[i][this.d - 10] = 3;
+                this.board[i][this.d - 11] = 3;
+            }
+        }
+    };
+    QR.prototype.loadData = function (train) {
+        var lim = 0;
+        var limMax = train.length;
+        for (var j = this.d - 1; j >= 0; j = j - 2) {
+            if (j % 4 == 0) {
+                for (var i = this.d - 1; i >= 0 && lim < limMax; i--) {
+                    //console.log(i, j);
+                    if (this.board[i][j] == 0 && lim < limMax) {
+                        this.board[i][j] = Number(train[lim]);
+                        lim = lim + 1;
+                    }
+                    if (this.board[i][j - 1] == 0 && lim < limMax) {
+                        this.board[i][j - 1] = Number(train[lim]);
+                        lim = lim + 1;
+                    }
+                }
+            }
+            else {
+                for (var i = 0; i <= this.d - 1 && lim < limMax; i++) {
+                    //console.log(i, j);
+                    if (this.board[i][j] == 0 && lim < limMax) {
+                        this.board[i][j] = Number(train[lim]);
+                        lim = lim + 1;
+                    }
+                    if (this.board[i][j - 1] == 0 && lim < limMax) {
+                        this.board[i][j - 1] = Number(train[lim]);
+                        lim = lim + 1;
+                    }
+                }
+            }
+        }
+    };
+    QR.prototype.mask = function () {
+        for (var j = 0; j < this.d; j++) {
+            for (var i = 0; i < this.d; i++) {
+                if ((i + j) % 2 == 0) {
+                    switch (this.board[i][j]) {
+                        case 0:
+                            this.board[i][j] = 1;
+                            break;
+                        case 1:
+                            this.board[i][j] = 0;
+                            break;
+                        //default: console.log("hi");
+                    }
+                }
+            }
+        }
     };
     QR.prototype.formatInfo = function () {
+        if (this.version < 7) {
+            var info = "011010101011111";
+            var ii = 0;
+            var iii = 0;
+            this.board[8][8] = Number(info[7]) == 1 ? 4 : 2;
+            for (var i = 0; i < 8; i++) {
+                // información de area (arriba izq)
+                if (i != 6) {
+                    //console.log(info[i])
+                    this.board[8][i] = Number(info[ii]) == 1 ? 4 : 2;
+                    ii++;
+                }
+                if (i != 1) {
+                    this.board[7 - i][8] = Number(info[7 + i]) == 1 ? 4 : 2;
+                }
+                // información de area (abajo izq)
+                if (this.board[this.d - 1 - i][8] != 4) {
+                    this.board[this.d - 1 - i][8] = Number(info[i]) == 1 ? 4 : 2;
+                    ;
+                }
+                // información de area (arriba der)
+                this.board[8][this.d - 1 - i] = Number(info[info.length - 1 - i]) == 1 ? 4 : 2;
+                ;
+            }
+        }
     };
     return QR;
 }());
-var qr = new QR("There/'s a frood who really knows where his towel is!", 5, "Q");
+/*
+let qr = new QR(`There\\'s a frood who really knows where his towel is!`, 5, "Q")
+
+const canvas:any = document.getElementById("canvas");
+const ctx:any = canvas.getContext("2d");
+
+qr.draw();
+*/
 //console.log("modo+cci",qr.firstPart());
 //console.log("mensaje: ",qr.msgEncoding())
 //console.log("data coding", qr.dataEncoding());
 //console.log("data groups", qr.makeGroups(qr.dataEncoding()))
-console.log("errors", qr.errorEncoding());
-var arr = [[[67, 85, 70, 134, 87, 38, 85, 194, 119, 50, 6, 18, 6, 103, 38],
-        [246, 246, 66, 7, 118, 134, 242, 7, 38, 86, 22, 198, 199, 146, 6]],
-    [[182, 230, 247, 119, 50, 7, 118, 134, 87, 38, 82, 6, 134, 151, 50, 7],
-        [70, 247, 118, 86, 194, 6, 151, 50, 16, 236, 17, 236, 17, 236, 17, 236]]];
-console.log("error_test", qr.errorEncodingTest(arr));
+/*let arr=
+[[[67,85,70,134,87,38,85,194,119,50,6,18,6,103,38],
+[246,246,66,7,118,134,242,7,38,86,22,198,199,146,6]],
+[[182,230,247,119,50,7,118,134,87,38,82,6,134,151,50,7],
+[70,247,118,86,194,6,151,50,16,236,17,236,17,236,17,236]]];
+
+console.log("error_test", qr.errorEncoding(arr));
+*/
+//console.log(qr.getFinalForm());
+console.log("cambio");
