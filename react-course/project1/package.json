@@ -1,5 +1,8 @@
-{ "scripts": {
-  "web":"expo start --web"
+{ 
+  "homepage": "https://yardev.net/pomodoro",
+  "scripts": {
+  "web":"expo start --web",
+  "build": "expo build:web"
 },
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
