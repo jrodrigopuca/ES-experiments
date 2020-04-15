@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import Constants from 'expo-constants';
 import contacts, {compareNames} from './contacts';
-import Row from './Row';
-
+import ContactList from './ContactList';
+import AddContactForm from './addContactForm'
 
 export default class App extends React.Component{
   state ={
     showContacts: false, 
+    showForm: false,
     contacts: contacts
   }
 
@@ -15,9 +16,10 @@ export default class App extends React.Component{
     this.setState(prev => ({showContacts:!prev.showContacts}))
   }
 
-  //utilizo 'item' porque es lo que obtengo del flatlist
-  renderItem = (obj) => <Row {...(obj.item)}/>
-  //otra forma es usar:  renderItem = ({item}) => <Row {...item}/>
+  toggleForm = () =>{
+    this.setState(prev => ({showForm:!prev.showForm}))
+  }
+
 
   sort = () =>{
     this.setState(prev =>({contacts: [...prev.contacts].sort(compareNames)}))
@@ -25,13 +27,17 @@ export default class App extends React.Component{
   }
 
   render(){
+    if (this.state.showForm) return (<AddContactForm />)
     return (
       <View style={styles.container}>
         <Button title="mostrar contactos" onPress={this.toggleContacts} />
+        <Button title="agregar contacto" onPress={this.toggleForm} />
         <Button title="ordenar" onPress={this.sort} />
+
         {this.state.showContacts && (
-          <FlatList data={this.state.contacts} renderItem={this.renderItem} />
+          <ContactList contacts={this.state.contacts}/>
         )}
+
 
       </View>
     );
@@ -52,5 +58,5 @@ const styles = StyleSheet.create({
   }, 
   contentScroll:{
     alignItems:'center',
-  }
+  },
 });
