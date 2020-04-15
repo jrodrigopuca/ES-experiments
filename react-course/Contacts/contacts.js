@@ -13,5 +13,5 @@ const createContact=()=>({name:generateName(), phone:generatePhoneNumber()})
 
 const addKeys = (val, key)=>({key: "a"+key, ...val})
 
-export const compareNames= (contact1, contact2)=> contact1.name > contact2.name;
+export const compareNames= (contact1, contact2)=> (contact1.name < contact2.name)?-1:1;
 export default Array.from({length:NUM_CONTACTS}, createContact).map(addKeys);

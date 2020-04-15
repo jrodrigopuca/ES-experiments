@@ -123,7 +123,10 @@ export default class C01 extends React.Component{
 - Encontrar algo que solucione tu problema
 - Configurar usando el API 
 
-
-
-
-
+## FlatList
+- Una vista mejorada para mostrar una gran cantidad de datos
+- "Virtualizado": solo muestra lo que se necesita en el tiempo:
+	- Solo las filas visibles son renderizadas en el primer ciclo
+	- Las filas son recicladas y las filas que ya no son visibilizadas pueden ser desmontadas
+- En props se debe pasar un array de los datos y una función renderItem
+- Solo actualiza si sus props son cambiados 	

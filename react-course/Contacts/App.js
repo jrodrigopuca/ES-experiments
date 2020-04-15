@@ -15,14 +15,14 @@ export default class App extends React.Component{
     this.setState(prev => ({showContacts:!prev.showContacts}))
   }
 
+  //utilizo 'item' porque es lo que obtengo del flatlist
   renderItem = (obj) => <Row {...(obj.item)}/>
+  //otra forma es usar:  renderItem = ({item}) => <Row {...item}/>
 
   sort = () =>{
-    
     this.setState(prev =>({contacts: [...prev.contacts].sort(compareNames)}))
     console.log(this.state.contacts)
   }
-
 
   render(){
     return (
