@@ -1,25 +1,44 @@
 import React from 'react';
-import {TextInput, View, Button, StyleSheet} from 'react-native';
+import {TextInput, View, Button, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import PropTypes from 'prop-types';
 import Constants from 'expo-constants';
 
 export default class AddContactForm extends React.Component{
     static propTypes ={
-        addContact: PropTypes.func
+        onSubmit: PropTypes.func
     }
 
-    state = {name:'', phone:''}
+    state = {name:'', phone:'', isFormValid:false}
 
-    handleNameChange = name => {this.setState({name})}
-    handlePhoneChange = phone => {this.setState({phone})}
+    handleNameChange = name => {this.setState({name}, this.validateForm)}
+    handlePhoneChange = phone => {
+        if (+phone >=0 && phone.length <=10){this.setState({phone}, this.validateForm)}
+    }
+
+    validateForm = () =>{
+        const valid= (+this.state.phone >=0 && this.state.phone.length ===10 && this.state.name.length>3);
+        this.setState({isFormValid:valid})
+    }
+
+    /*
+    //Forma para validar sin usar el callback
+    componentDidUpdate(prevProps, prevState){
+        if (this.state.name !== prevState.name || this.state.phone!== prevState.phone){
+            this.validateForm()
+        }
+    }*/
+
+    handleSubmit = () => {
+        this.props.onSubmit({...this.state});
+    }
 
     render(){
         return (
-            <View style={styles.container}>
-                <TextInput style={styles.input} value={this.state.name} onChangeText={this.handleNameChange}/>
-                <TextInput style={styles.input} value={this.state.phone} onChangeText={this.handlePhoneChange} keyboardType="numeric"/>
-                <Button title="Add Contact"/>
-            </View>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
+                <TextInput style={styles.input} value={this.state.name} onChangeText={this.handleNameChange} placeholder="Name"/>
+                <TextInput style={styles.input} value={this.state.phone} onChangeText={this.handlePhoneChange} keyboardType="numeric" placeholder="Phone"/>
+                <Button title="Add Contact" onPress={this.handleSubmit} disabled={!this.state.isFormValid}/>
+            </KeyboardAvoidingView>
         )
     }
 
@@ -30,6 +49,7 @@ const styles = StyleSheet.create({
         padding:5, 
         borderColor: 'black',
         borderWidth:1,
+        justifyContent: 'center'
     },
     container:{
         paddingTop: Constants.statusBarHeight,

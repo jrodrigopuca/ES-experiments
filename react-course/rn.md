@@ -123,10 +123,45 @@ export default class C01 extends React.Component{
 - Encontrar algo que solucione tu problema
 - Configurar usando el API 
 
+## Scrollview
+- Permite desplazamiento
+
 ## FlatList
 - Una vista mejorada para mostrar una gran cantidad de datos
 - "Virtualizado": solo muestra lo que se necesita en el tiempo:
 	- Solo las filas visibles son renderizadas en el primer ciclo
 	- Las filas son recicladas y las filas que ya no son visibilizadas pueden ser desmontadas
-- En props se debe pasar un array de los datos y una función renderItem
+- En props se debe pasar un array de los datos (data) y una función que detalle como esos item serán renderizados (renderItem)
 - Solo actualiza si sus props son cambiados 	
+
+## SectionList
+- Similar a FlatList con soporte adicional para secciones.
+- En vez de usar 'data' usa 'sections'
+	- cada sección tiene su propio array
+	- cada sección puede sobreescribir el renderItem con su propia función
+- Se debe usar la función renderSectionHeader para los encabezados
+
+## Input
+- controlado vs no-controlado:
+	- la entrada es una fuente confiable?
+- React recomienda siempre usar componentes controlados
+- Usar OnChangeText (callback que se usa al cambiar un valor)
+
+## Manejando multiples entradas
+- form existe en html pero no en RN
+- con los componentes controlados, nosotros obtenemos un objeto con todos los valores de las entradas
+- Nosotros podemos definir una función que administre como los datos son enviados (como un controlador)
+
+# Validando Entrada
+- Condicionando el estado basado en el valor de la entrada
+- Validar formulario antes de enviar
+- Validar formulario despues de un cambio en el input
+ 	- this.setState() puede tomar un callback como un segundo argumento
+ 	- también se puede usar a componentDidUpdate()
+
+## KeyboardAvoidingView
+- El componente nativo puede evitar el teclado virtual
+- Es bueno para formas simples:
+	- La vista mueve independiente de cualquier input
+	
+
