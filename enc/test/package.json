@@ -5,9 +5,16 @@
   "license": "MIT",
   "scripts": {
     "s01": "node 01-algoritmos",
-    "s02": "node 02-encriptarData"
+    "s02": "node 02-encriptarData",
+    "s03": "node 03-asincronico",
+    "s04": "node 04-hmac",
+    "s05": "node 05-dobleF"
   },
   "dependencies": {
-    "crypto": "^1.0.1"
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "qrcode": "^1.4.4",
+    "speakeasy": "^2.0.0"
   }
 }

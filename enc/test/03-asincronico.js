@@ -1,0 +1,21 @@
+const crypto = require('crypto');
+const ClientA= crypto.createDiffieHellman(2048) //2048 bits para la key
+const ClientA_Key= ClientA.generateKeys();
+
+//esto permitira crear una clave compartida
+const ClientB = crypto.createDiffieHellman(ClientA.getPrime(), ClientA.getGenerator()) 
+const ClientB_Key= ClientB.generateKeys();
+
+const ClientA_secret = ClientA.computeSecret(ClientB_Key);
+const ClientB_secret = ClientB.computeSecret(ClientA_Key);
+
+console.log("clave pública A: ", ClientA_secret.toString('hex'))
+console.log("clave pública B: ", ClientB_secret.toString('hex'))
+
+console.log("son iguales?: ", ClientA_secret.toString('hex')===ClientB_secret.toString('hex')) 
+
+/*
+clave pública A:  79e8c0c7d3eeaa0bf514b46ad4a2c854cb6467eb22434b464455317a132c6badb9139d185399272e72d207ed7300a7633fb6900bce0b877adf8507308a9f8d93059f72e6bd0e36f97ca3f9da18f3179222e24a124f15037150f82f1be86da7ddd1a0e068c03b2a91e57f0a42a338415f57af8b8df174ac0ea5f5785c1931c74d9e139a352a68afd12f2f774677bae38b9edb5b9fa97a36725ac7f0bed1f2e24aae4de936a4ede73f5ba7d3b55cbfbcf1c53ca806f056e48abcd48c59744bed02a15ea16bf7b5950b0b11a36c691d39d0ab92285e70b3866ad8dbeb9f43a00793ea65e30c1eaa46364eee457477ca82706c6ba9485908893809aa77a7879fb9ee
+clave pública B:  79e8c0c7d3eeaa0bf514b46ad4a2c854cb6467eb22434b464455317a132c6badb9139d185399272e72d207ed7300a7633fb6900bce0b877adf8507308a9f8d93059f72e6bd0e36f97ca3f9da18f3179222e24a124f15037150f82f1be86da7ddd1a0e068c03b2a91e57f0a42a338415f57af8b8df174ac0ea5f5785c1931c74d9e139a352a68afd12f2f774677bae38b9edb5b9fa97a36725ac7f0bed1f2e24aae4de936a4ede73f5ba7d3b55cbfbcf1c53ca806f056e48abcd48c59744bed02a15ea16bf7b5950b0b11a36c691d39d0ab92285e70b3866ad8dbeb9f43a00793ea65e30c1eaa46364eee457477ca82706c6ba9485908893809aa77a7879fb9ee
+son iguales?:  true
+*/
