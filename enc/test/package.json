@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "s01": "node 01-algoritmos",
+    "s02": "node 02-encriptarData"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
+}
