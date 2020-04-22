@@ -118,4 +118,9 @@ Recordar:
  para autenticación
  - Usar Access Token para acceder al API
 
+## Tipos de OAuth Grants (o flujos de datos)
+- Código de autorización: Para aplicaciones del lado del servidor
+- Implicitas: Aplicaciones web del lado del cliente
+- credenciales o passwords del propietario: aplicaciones propias
+- credenciales: acceso al API
 
