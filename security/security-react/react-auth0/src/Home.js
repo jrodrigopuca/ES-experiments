@@ -4,10 +4,11 @@ import {Link} from 'react-router-dom';
 class Home extends Component {
     render() {
         const {isAuthenticated, login} = this.props.auth;
+        console.log(this.props.auth);
         return (
             <div>
                 <h1>Home</h1>
-                {isAuthenticated?(
+                {isAuthenticated() ?(
                     <Link to="/profile">Ver perfil</Link>
                 ):(
                     <button onClick={login}>Log In</button>
