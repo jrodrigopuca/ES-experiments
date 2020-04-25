@@ -26,8 +26,8 @@ Los widgets son:
 - personalizable
 
 ## Aplicando autenticación
-### Redirigir a la página de autenticación de Auth0
-creo un nuevo archivo ("Auth/Auth.js"), en donde defino una clase para usar Auth0:
+### Auth.JS
+creo un nuevo archivo ("Auth/Auth.js"), en donde defino una clase para usar una instancia de Auth0:
 
 ```
 class Auth {
@@ -37,11 +37,24 @@ class Auth {
     }
 
     login = () =>{ this.auth0.authorize();}
+    handleAuth=()=>{ this.auth0.parseHash()=>{}}
+    setSession=()=>{}
+    isAuthenticated=()=>{}
+    logout = () =>{this.auth0.logout({})
+    getAccessToken = () =>{}
+    getProfile = fn => {this.auth0.client.userInfo()}
 }
 ```
 Notar que:
+- en el contrustor voy guardando el history para moverme entre las páginas
 - this.auth0: es una instancia para usar Auth0 con Auth0-js 
-- login, será la función que permita la redirección a la página de Auth0
+- login: será la función que permita la redirección a la página de Auth0
+- handleAuth: ocurrirá luego del login
+- setSession: guardará los datos del login
+- isAuthenticated: devolverá un booleano para saber si el usuario esta logeado
+- logout: cerrar sesión
+- getAccessToken: booleano para saber si se obtuvieron datos luego del login
+- getProfile: dar los datos del perfil del usuario
 
 ### Auth0 redirige a la app
 Desde un botón en "./Home.js" llamó al evento login:
@@ -92,6 +105,7 @@ Notar que:
 ### XSS
 - el atacante inyecta código en el lado del cliente
 - Riesgo: perder el control del contenido del usuario
+- ejemplo: ```app.com?q=<script%20type='text/javascript'>alert('xss');</script> ```
 
 ### No almacenar tokens en Local Storage
 El almacenamiento local (o por sesión) en el navegador no es seguro. Cualquier dato que sea almacenado en ese lugar puede ser vulnerado por XSS. Si un atacante obtiene un token, ellos pueden tener acceso y hacer pedidos a tu API. 
@@ -100,4 +114,21 @@ Si tu app tiene backend entonces debería implementarse el mismo usando la imple
 
 Para SPA es mejor almacenarlo en memoria sin persistencia, se debería pedir nuevos tokens al cargar la página. Para llamar al API deberías usar una copia en memoria del token. Si el usuario cambia de pestaña o la cierra no necesariamente pierde su token, se puede usar 'silent auth' para evitar este problema.
 
+## Trabajando con un API
+para usar el backend y el front en el mismo servidor:
+- [usar proxy en package.json](https://create-react-app.dev/docs/proxying-api-requests-in-development/). 
 
+## Validar un JWT
+- verificar con firma: Auth0 provee un json web key (jwks) para probar que correctamente se llame al API.
+El archivo se encuentra en http://my-auth-domain/.well-known/jwks.json. El JWKs es una llave criptografica, las partes del objeto representan las propiedades de la llave y sus valores. Nuestra API utilizará esta información para verificar el JWT 
+
+```
+{"keys":[
+  {"alg": "RS256, "kty":"RSA", "use": "sig", "x5c":["MICC..]},],
+  "n":"ydmJ..", "e":"AQAB", "kid": "NVljj0BPKOIUYTSCVBJHGFVJBJBH", "x5t": "NVljj0BPKOIUYTSCVBJHGFVJBJBH"
+}
+```
+- validar las solicitudes:
+  - exp (expiration): confirma que no haya expirado
+  - iss (issued by): confirmar que sea igual al dominio de Auth0
+  - aud (Audience): confirmar que sea igual a tu clientID
