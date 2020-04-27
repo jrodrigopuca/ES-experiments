@@ -1,7 +1,7 @@
 ## Auth0 con react
 ```
 npx create-react-app react-auth0
-yarn add express express-jwt express-jwt-auth jwks-rsa auth0-js auth0-lock react-router-dom
+yarn add express express-jwt express-jwt-authz jwks-rsa auth0-js auth0-lock react-router-dom
 yarn add npm-run-all --dev
 ```
 
@@ -132,3 +132,9 @@ El archivo se encuentra en http://my-auth-domain/.well-known/jwks.json. El JWKs 
   - exp (expiration): confirma que no haya expirado
   - iss (issued by): confirmar que sea igual al dominio de Auth0
   - aud (Audience): confirmar que sea igual a tu clientID
+
+## OAuth 2
+- Brinda permisos sin compartir credenciales (sin compartir username o password)
+- cada permiso que tu brindas se llama 'scope'
+- Los 'scopes' delegan permisos, son las acciones que una app puede hacer por medio del usuario
+- 
