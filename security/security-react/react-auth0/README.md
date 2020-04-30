@@ -257,3 +257,9 @@ function setRolesToUser(user, context, callback) {
 - roles: ejemplo: admin. Es un grupo de usuarios con permisos, tu garantizas diferentes permisos para cada rol. Son simples, escalables, son mejores que los scopes porque no harán JWTs inmensos (los roles encapsularan los permisos), son más rápidos y mantenibles con el tiempo.
 
 Usa scopes cuando interactues con 3ras partes, utiliza roles cuando tu manejarás manualmente los permisos con tu app.
+
+## Silent authentication
+Para evitar almacenar los datos en localStorage o cookies es posible almacenarlos en memoria.
+Pero si el usuario cambia a otra pestaña tendrá que volver a logearse porque pierde los tokens.
+Para evitar que esto ocurra se usa silent authentication, esto lo que hará es mantener un iframe oculto de Auth0 a la espera. Si el usuario usa otro tab o ventana, los tokens se recibirán ahí y podrá seguir navegando sin necesidad de logearse de nuevo. Por defecto funciona bien con las cuentas usuario-contraseña, para las cuentas sociales se deberá entrar a Auth0 y agregar los datos que necesite cada proveedor.
+
