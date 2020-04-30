@@ -137,4 +137,123 @@ El archivo se encuentra en http://my-auth-domain/.well-known/jwks.json. El JWKs 
 - Brinda permisos sin compartir credenciales (sin compartir username o password)
 - cada permiso que tu brindas se llama 'scope'
 - Los 'scopes' delegan permisos, son las acciones que una app puede hacer por medio del usuario
-- 
+
+## Reglas 
+Una regla en Auth es una función con los siguientes argumentos:
+- user: el objeto usuario que viene del proveedor de identidad. [Más info](https://auth0.com/docs/rules/references/user-object)
+- context: un objeto que contiene información de la actual transacción como la IP del usuario, aplicación o ubicación. [Más info](https://auth0.com/docs/rules/references/context-object)
+- callback: función para enviar los tokens a Auth0.
+
+Una vez que el usuario ingresa sesión se aplican. 
+
+### Creando una regla [ejemplo]
+#### regla: Usuarios con x dominio pasan a ser admin
+```
+function setRolesToUser(user, context, callback) {
+
+  // Roles should only be set to verified users.
+  if (!user.email || !user.email_verified) {
+    return callback(null, user, context);
+  }
+
+  user.app_metadata = user.app_metadata || {};
+  // You can add a Role based on what you want
+  // In this case I check domain
+  const addRolesToUser = function (user) {
+    const endsWith = '@midominio.com';
+
+    if (user.email && (user.email.substring(user.email.length - endsWith.length, user.email.length) === endsWith)) {
+      return ['admin'];
+    }
+    return ['user'];
+  };
+
+  const roles = addRolesToUser(user);
+
+  user.app_metadata.roles = roles;
+  auth0.users.updateAppMetadata(user.user_id, user.app_metadata)
+    .then(function () {
+      context.idToken['http://localhost:3000/roles'] = user.app_metadata.roles;
+      callback(null, user, context);
+    })
+    .catch(function (err) {
+      callback(err);
+    });
+}
+
+```
+
+
+#### usuario
+```
+  {
+    "created_at": "2020-04-24T17:53:53.325Z",
+    "email": "xxxxxxxxxxxx@mydominio.com",
+    "email_verified": true,
+    "family_name": "Surname",
+    "given_name": "Name",
+    "identities": [
+        {
+            "provider": "google-oauth2",
+            "user_id": "100000000000000000000",
+            "connection": "google-oauth2",
+            "isSocial": true
+        }
+    ],
+    "locale": "en",
+    "name": "X",
+    "nickname": "nick",
+    "picture": "https://.../photo.jpg",
+    "updated_at": "2020-04-24T17:58:07.420Z",
+    "user_id": "google-oauth2|100000000000000000000",
+    "last_ip": "101.101.101.101",
+    "last_login": "2020-04-24T17:58:07.420Z",
+    "logins_count": 2,
+    "blocked_for": [],
+    "guardian_authenticators": []
+}
+```
+#### context
+```
+{
+  "clientID": "123456789",
+  "clientName": "MyWebApp",
+  "connection": "MyDbConn",
+  "connectionStrategy": "auth0",
+  "protocol": "oidc-basic-profile",
+  "request": {
+    "query": {
+      "scope": "openid"
+    },
+    "body": {},
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36",
+    "ip": "X.X.X.X",
+    "geoip": {
+      "country_code": "AR",
+      "country_code3": "ARG",
+      "country_name": "Argentina",
+      "region": "08",
+      "city": "Federal",
+      "postal_code": "3180",
+      "latitude": -31,
+      "longitude": -59,
+      "continent_code": "SA",
+      "time_zone": "America/Argentina/Buenos_Aires"
+    }
+  },
+  "samlConfiguration": {},
+  "stats": {
+    "loginsCount": 5
+  },
+  "accessToken": {},
+  "idToken": {}
+}
+```
+
+
+## Opciones de Autorización
+- Session Cookies: son más simple, seguras, requieren la autorización del usuario en cada acción y no son buenas en performance. Estos problemas pueden solucionarse almacenando en memoria chaché a los datos de sesión del usuario
+- Scopes (permisos) ejemplo: ```edit:user ```: Los permisos o scopes fueron diseñados para especificar lo que una aplicación puede hacer a partir de los datos del usuario. Brinda mayor performance al no tener que solicitar muchas veces comprobar un dato, se necesita JWT con los permisos (si la app es simple esto puede funcionar bien, pero si hay muchos permisos el JWT incrementará mucho su tamaño especialmente en escenarios complejos como un 'ecommerce').
+- roles: ejemplo: admin. Es un grupo de usuarios con permisos, tu garantizas diferentes permisos para cada rol. Son simples, escalables, son mejores que los scopes porque no harán JWTs inmensos (los roles encapsularan los permisos), son más rápidos y mantenibles con el tiempo.
+
+Usa scopes cuando interactues con 3ras partes, utiliza roles cuando tu manejarás manualmente los permisos con tu app.

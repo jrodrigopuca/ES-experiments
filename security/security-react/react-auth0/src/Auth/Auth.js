@@ -1,4 +1,6 @@
 import auth0 from 'auth0-js';
+const REDIRECT_ON_LOGIN= "redirect_on_login";
+
 export default class Auth {
     constructor(history){
         this.userProfile = null;
@@ -14,7 +16,13 @@ export default class Auth {
         })
     }
 
+    /**
+     * @description: función para hacer login
+     * - guarda en localStorage el lugar desde donde llamo al login
+     * - muestra el login de Auth0
+     */
     login = () =>{
+        localStorage.setItem(REDIRECT_ON_LOGIN, JSON.stringify(this.history.location))
         this.auth0.authorize();
     }
 
@@ -23,17 +31,22 @@ export default class Auth {
      *  - desde el dashboard de Auth0 definir la ruta  
      *  - esperar información luego del login con esta función en el ComponentDidMount
      *  - enviar data a setSession
-     *  - redireccionar al Inicio (para que el usuario no vea el callback) 
+     *  - redireccionar a la página antes de hacer login (para que el usuario no vea el callback) 
      */
     handleAuth = () =>{
         this.auth0.parseHash((err, authResult)=>{
             if (authResult && authResult.accessToken && authResult.idToken){
+                
                 this.setSession(authResult);
-                this.history.push("/")
+                const redirectLocation = localStorage.getItem(REDIRECT_ON_LOGIN) === "undefined" 
+                    ? "/"
+                    :JSON.parse(localStorage.getItem(REDIRECT_ON_LOGIN));
+                this.history.push(redirectLocation)
             }else if (err){
                 this.history.push("/");
                 alert(`Error ${err.error}`); console.log(err);
             }
+            localStorage.removeItem(REDIRECT_ON_LOGIN);
         })
     }
 

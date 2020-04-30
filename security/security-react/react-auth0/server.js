@@ -17,6 +17,21 @@ const checkJwt = jwt({
     algorithms: ['RS256']
 });
 
+
+/**
+ * Si tiene el rol correspondiente le deja acceder al endpoint
+ * si no tiene el rol correspondiente le envia un 401.
+ * @param role: rol que necesita el endpoint del API 
+ */
+const checkRole = (role) =>{
+    return (req, res, next) =>{
+        const assignedRoles = req.user["http://localhost:3000/roles"];
+        if (Array.isArray(assignedRoles) && assignedRoles.includes(role)) return next(); 
+        else return res.status(401).send("No eres admin"); 
+    } 
+}
+
+
 const app = express();
 
 //endpoint público (cualquiera puede llamarlo)
@@ -36,6 +51,13 @@ app.get('/courses', checkJwt, checkScope(["read:courses"]), (req, res) => {
         {id:2, title: "Creating Components"}
     ] })
 })
+
+//endpoint privado con role
+app.get('/admin', checkJwt, checkRole('admin'), (req, res) => {
+    res.json({ message: "hello admin" })
+})
+
+
 
 app.listen(3001);
 console.log("API en " + process.env.REACT_APP_AUTH0_AUDIENCE);
