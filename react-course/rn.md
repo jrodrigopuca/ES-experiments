@@ -164,4 +164,50 @@ export default class C01 extends React.Component{
 - Es bueno para formas simples:
 	- La vista mueve independiente de cualquier input
 	
+## Debugging
+- errores/warnings en React
+    - Errores: se muestran como alertas a página completa
+        - console.error('error')
+        - throw new Error('this is also an error')
+    - Advertencias: se muestran como avisos en la parte inferior de la app
+        - console.warn('advertencia')
+        - no aparecen en modo de producción
+- Chrome Developer Tools (devtools)
+    - usar breakpoints
+- RN Inspector
+    - similar al inspector de elementos de Chrome
+    - permite inspeccionar a los elementos (margin, padding, size, etc)
+    - no permite modificar elementos en el momento
+- react-devtools
+    - inspecciona la jeraquía de los componentes de React, incluyendo prop y states de los componentes
+    - instalar con ```npm install -g react-devtools```
+    - iniciar con ```react-devtools```
+    - permite editar en el momento a los estilos, props, etc.
+    - usarlo junto con el emulador (no funciona en RN web o con un dispositivo conectado)
+
+## Librerías externas
+- es código escrito fuera del contexto de tu proyecto que puedes usarlo dentro de tu proyecto
+- como RN es solo JS, puedes agregar cualquier librería JS
+- agregarlo usando yarn/npm 
+
+## Navegación con React
+Formas de implementarlo una navegación:
+- Implementarlo con JS + React
+- Implementarlo en nativo: usando un wrapper para las APIs existentes en iOS/Android 
+RN usa la primera implementación
+para instalar usar ```npm install react-navigation ```
+
+### Realizando la navegación
+- Navigator: es un componente que implementa un patrón de navegación (ej: tabs)
+- Cada navigator puede tener una o más rutas (routes)
+- Cada ruta debe tener un nombre y un componente (screen component)
+    - el nombre es único en la app
+    - los screen components son los componente que se mostrarán cuando la ruta este activa
+    - el screen component también puede ser otro navigator.
+
+01:17:58
+
+
+
+
 
