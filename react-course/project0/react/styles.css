@@ -41,33 +41,34 @@ button:focus {
   box-shadow: none;
 }
 
-/*
+
 input[type=checkbox]{
-  width: 30px;
-  height: 30px;
+  width: 43px;
+  height: 43px;
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: 1.6em;
   visibility: hidden;
 }
 input[type=checkbox]:after {
-  content: " ";
-  background-color: #fff;
+  content: "⭕";
+  background-color: rgba(56, 54, 54, 0.1);
   display: inline-block;
-  width: 30px;
-  height: 30px;
-  color: #2196F3;
+  width: 43px;
+  height: 43px;
+  color: white;
   visibility: visible;
-  border: 1px groove #2196F3;
-  border-radius: 5px;
+  border: 2px solid white;
+  border-radius: 10px;
   text-align: center;
 }
 
 input[type=checkbox]:checked:after {
-  content: "\2714";
+  content: "✔️";
   padding: -5px;
   font-weight: bold;
+  background-color: aquamarine;
 }
-*/
+
 
 .center {
   align-self: center;
@@ -122,5 +123,5 @@ input[type=checkbox]:checked:after {
 
 .todo-text{
   word-break: break-word;
-  width: 150px;
+  width: 130px;
 }

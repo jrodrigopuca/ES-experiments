@@ -9,7 +9,7 @@ const Todo = props => {return (
             checked={props.todo.checked}
             onChange={props.onToggle}
         />
-        <button className="todo-delete" onClick={props.onDelete}> delete </button>
+        <button className="todo-delete" onClick={props.onDelete}> 🗑️ </button>
     </li>
 )};
 
