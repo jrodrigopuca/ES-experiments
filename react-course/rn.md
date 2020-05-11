@@ -197,7 +197,7 @@ Formas de implementarlo una navegación:
 RN usa la primera implementación
 para instalar usar ```npm install react-navigation ```
 
-### Realizando la navegación
+### Realizando la navegación con React Navigation
 - Navigator: es un componente que implementa un patrón de navegación (ej: tabs)
 - Cada navigator puede tener una o más rutas (routes)
 - Cada ruta debe tener un nombre y un componente (screen component)
@@ -205,7 +205,44 @@ para instalar usar ```npm install react-navigation ```
     - los screen components son los componente que se mostrarán cuando la ruta este activa
     - el screen component también puede ser otro navigator.
 
-01:17:58
+### Creando la navegación
+Crear Navigator: se utiliza la función creatSwitchNavigator que devuelve un componente, es un HOC, es un componente que devuelve componentes y nombre de rutas.
+
+```
+import {createSwitchNavigator} from 'react-navigation';
+
+const AppNavigator = createSwitchNavigator({
+    "RutaUno":ScreenComponentOne,
+    "RutaDos":ScreenComponentTwo,
+})
+```
+
+Mostrar el navigator: por lo general esto se realiza desde la raíz de la app
+
+```
+export default class App extends React.Component{
+    render(){
+        return <AppNavigator/>
+    }
+}
+```
+
+Navegando a otra ruta: cada Screen component tiene como prop a navigation y desde allí se puede redireccionar.
+
+```
+class ScreenComponentOne extends React.Component{
+    render(){
+        return (<Button title="Ir a dos" 
+        onPress={()=>this.props.navigation.navigate('RutaDos')}/>)
+    }
+}
+```
+
+
+### HOC (Higher order components)
+- Es una técnica avanzada en React para reutilizar componentes
+- son similares a las higher order functions, las cuales son funciones que toman funciones como argumentos o regresan una función como resultado.
+- [Más info](http://reactjs.org/docs/higher-order-components.html)
 
 
 

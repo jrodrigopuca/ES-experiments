@@ -2,7 +2,6 @@ const e= React.createElement;
 
 const Todo = props => {return (
     <li key={props.todo.id}>
-        <span>[{props.todo.id}]: </span>
         <span className="todo-text">{props.todo.text}</span>
         <input
             type="checkbox"
@@ -13,8 +12,6 @@ const Todo = props => {return (
         <button className="todo-delete" onClick={props.onDelete}> delete </button>
     </li>
 )};
-
-let id = 0;
 
 
 class App extends React.Component {
@@ -32,10 +29,14 @@ class App extends React.Component {
 
     addTodo() {
         const text = prompt("text please!");
-        this.setState({
-            todos: [...this.state.todos, { id: id++, text: text, checked: false }]
-        });
-        //localStorage.setItem('todos', JSON.parse(this.state.todos));
+        if (text === null){return;}
+        if (text !== ""){
+            const id = Date.now();
+            this.setState({
+                todos: [...this.state.todos, { id: id, text: text, checked: false }]
+            });
+            //localStorage.setItem('todos', JSON.parse(this.state.todos));
+        }
     }
 
     toggleTodo(id) {
