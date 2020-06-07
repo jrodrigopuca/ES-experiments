@@ -1,17 +1,17 @@
-{ 
+{
   "homepage": "https://yardev.net/pomodoro",
   "scripts": {
-  "web":"expo start --web",
-  "build": "expo build:web"
-},
+    "web": "expo start --web",
+    "build": "expo build:web"
+  },
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
     "expo": "^36.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-dom":"^16.9.0",
+    "react-dom": "^16.9.0",
     "react-native": "^0.61.4",
-    "react-native-web":"^0.11.7"
+    "react-native-web": "^0.11.7"
   }
 }
