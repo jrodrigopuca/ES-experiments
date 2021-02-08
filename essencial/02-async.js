@@ -1,9 +1,9 @@
 /**
  * 
- * idea:
+ * @description: Crear un callback luego de ejecutado un resultado
  * hazAlgo(entradas, manejarResultados)
- * 
- * ejemplo
+ * --------------------------------
+ * @example: con conexion
  * var conexion=traerConexion(cadenaConexion)
  * var consulta=conexion.consultar()
  * ...
@@ -13,21 +13,9 @@
  *          ...       
  *      })    
  *  })
- */
-
-/*function sumar(n1,n2){
-    return (function f(a){console.log(a)});
-}
-
-division(num1,num2,function (err,resultado){
-    err=(num2==0);
-    resultado=err?
-
-})
-
-console.log("ho")*/
-
-/**
+ * --------------------------------
+ * @example: práctico 
+ * 
  * si la entrada es par, doblar
  * si la entrada es impara, error
  * 
@@ -50,4 +38,17 @@ for (let i = 0; i < 10; i++) {
     esPar(i,trabajarResultado)
 }
 
+/**
+ * resultado
+ * - valor 0  resultado 0
+ * - valor 1 error
+ * - valor 2 resultado 4
+ * - valor 3 error
+ * - valor 4 resultado 8
+ * - valor 5 error
+ * - valor 6 resultado 12
+ * - valor 7 error
+ * - valor 8 resultado 16
+ * - valor 9 error
+ */
 
