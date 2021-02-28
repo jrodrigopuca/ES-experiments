@@ -1,0 +1,23 @@
+Para publicar un módulo con NPM es necesario realizar los siguentes pasos:
+Crear el package.json con los datos del nuevo módulo, es esencial tener el nombre, version, dependencias
+{
+    "name": "amazing-module",
+    "version": "1.0.0",
+    "author": "jarp",
+    "descripcion": "A amazing Module",
+    "keyworda": ["amazing","module"],
+    "repository":{
+        "type": "git",
+        "url":"http://github.com/..."
+    },
+    "dependencies": {
+        "request": "^2.88.2"
+    },
+    "main":"lib/amazing.js"
+}
+
+Crear módulo para publicar:
+npm publish .
+
+Probar en otro proyecto
+npm install amazing-module
