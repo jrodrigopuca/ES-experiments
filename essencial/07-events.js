@@ -1,3 +1,18 @@
+/**
+ * 
+ * process.nextTick: usado para hacerlo asincrónico
+ * emit(): suscribiendosé a los eventos 
+ * 
+ * resultados:
+ * - el ballet cósmico ha comenzado
+ * - ya tengo la data: 1
+ * - ya tengo la data: 2
+ * - ya tengo la data: 3
+ * - ya tengo la data: 4
+ * - ya tengo la data: 5
+ * - terminamos con 5
+ */
+
 const EventEmitter = require('events').EventEmitter;
 
 const traerAlgo = function(valorMax){
