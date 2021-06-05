@@ -13,10 +13,13 @@ export const config = {amp: true};
 export default function Ampweb (props){
     return (
         <>
+            <h1> Aqui hay cosas para revisar</h1>
+            {/**
             <head>
                 <title>Hola AMP</title>
                 <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
             </head>
+            
             <amp-story standalone title="Probando">
                 <amp-story-page id="page1">
                     <amp-story-grid-layer template="vertical">
@@ -31,6 +34,7 @@ export default function Ampweb (props){
                 </amp-story-page>
 
             </amp-story>
+            */}
         </>
         );
 }
