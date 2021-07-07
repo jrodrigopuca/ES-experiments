@@ -54,3 +54,5 @@ valor="test"
 console.log((valor as string).toUpperCase());
 
 ```
+
+https://docs.microsoft.com/en-us/learn/modules/typescript-declare-variable-types/6-unions-intersections
