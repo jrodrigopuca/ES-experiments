@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 3000;
 
 app.get('/', function(req,res){
     //res.send('Hola')
-    Ticket.create({
-        titulo:"hola",
-        descripcion:"test"
-    }).then(user=>{
-        res.json(user);
-    })
+    // Ticket.create({
+    //     titulo:"hola",
+    //     descripcion:"test"
+    // }).then(user=>{
+    //     res.json(user);
+    // })
 })
 
 
