@@ -80,10 +80,13 @@ Good luck!
 If you want to play with the staff implementation, you can view it using
 Snack at [@jhhayashi/project1-solution](https://snack.expo.io/@jhhayashi/project1-solution).
 
-## Implementation
+## Steps
 
 ```
 npx create-expo-app project1
 npm i prop-types
+npm i react-native-web react-dom
+npm i @expo/webpack-config
+npx expo install --fix
 npm run web
 ```

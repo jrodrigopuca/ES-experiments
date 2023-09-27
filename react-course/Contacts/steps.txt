@@ -1,3 +1,0 @@
-expo init project-Contacts
-yarn add react-native-web react-dom
-yarn web
