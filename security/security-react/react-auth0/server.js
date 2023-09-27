@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-const jwt = require("express-jwt"); // Valida el JWT 
+const {expressjwt: jwt} = require("express-jwt"); // Valida el JWT
 const jwksRsa = require("jwks-rsa"); // Recibe el RSA desde un JWKS endpoint
 const checkScope = require("express-jwt-authz"); //Valida JWT scope
 
