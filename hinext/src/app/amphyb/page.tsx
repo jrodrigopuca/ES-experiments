@@ -10,8 +10,9 @@ import {useAmp} from 'next/amp';
 
 export const config= {amp:'hybrid'};
 
-export default function Amphyb(props){
+export default function Amphyb(){
     const isAmp = useAmp();
+    console.log(isAmp);
     return <p>Bienvenido a {isAmp ? 'AMP' : 'una página normal'} !!</p>;
 
 } 

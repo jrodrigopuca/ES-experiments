@@ -1,4 +1,4 @@
-import Layout from '../components/MyLayouts';
+import Layout from "@/components/Layout";
 
 const contenidoAbout=<p>Acerca de</p>;
 
