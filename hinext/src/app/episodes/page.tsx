@@ -14,6 +14,10 @@ const EpisodesPage = () => {
 			.then((data) => {
 				setEpisodes(data);
 				setIsLoading(false);
+			})
+			.catch((e: any) => {
+				console.log(e);
+				setIsLoading(false);
 			});
 	}, []);
 
