@@ -8,8 +8,13 @@ const nextConfig = {
         port: '',
         pathname: '/uploads/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'amp.dev',
+        port: '',
+        pathname: '/static/inline-examples/images/**',
+      }
     ],
   },
 }
-
 module.exports = nextConfig
