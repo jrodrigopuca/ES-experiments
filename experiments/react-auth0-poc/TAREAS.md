@@ -9,37 +9,38 @@ Este documento baja el plan de actualización a tareas concretas y ejecutables.
 Objetivo: separar responsabilidades y dejar una base clara para seguir trabajando.
 
 ### Estructura
-- [ ] crear carpeta `frontend/`
-- [ ] mover código de SPA React a `frontend/`
-- [ ] crear carpeta `backend/`
-- [ ] mover código de API Express a `backend/`
-- [ ] crear carpeta `scripts/` si realmente hace falta para arranque conjunto
-- [ ] revisar qué archivos deben quedar en la raíz de la PoC y cuáles no
+- [x] crear carpeta `frontend/`
+- [x] mover código de SPA React a `frontend/`
+- [x] crear carpeta `backend/`
+- [x] mover código de API Express a `backend/`
+- [x] crear carpeta `scripts/` si realmente hace falta para arranque conjunto
+- [x] revisar qué archivos deben quedar en la raíz de la PoC y cuáles no
 
 ### Dependencias
-- [ ] crear `package.json` propio para `frontend/`
-- [ ] mover dependencias de React/Auth0 al `package.json` de frontend
-- [ ] crear `package.json` propio para `backend/`
-- [ ] mover dependencias de Express/JWT al `package.json` de backend
-- [ ] eliminar dependencias cruzadas innecesarias
+- [x] crear `package.json` propio para `frontend/`
+- [x] mover dependencias de React/Auth0 al `package.json` de frontend
+- [x] crear `package.json` propio para `backend/`
+- [x] mover dependencias de Express/JWT al `package.json` de backend
+- [x] eliminar dependencias cruzadas innecesarias
 
 ### Scripts
-- [ ] definir `npm run start` para frontend
-- [ ] definir `npm run start` para backend
-- [ ] definir estrategia de arranque conjunto
-- [ ] decidir si el arranque conjunto vive en root o en `scripts/`
+- [x] definir `npm run start` para frontend
+- [x] definir `npm run start` para backend
+- [x] definir estrategia de arranque conjunto
+- [x] decidir si el arranque conjunto vive en root o en `scripts/`
+- [x] salir de `npm-run-all` y reemplazarlo por script bash explícito
 
 ### Variables de entorno
-- [ ] separar variables de frontend y backend
-- [ ] definir `.env.example` para frontend si aplica
-- [ ] definir `.env.example` para backend si aplica
+- [x] separar variables de frontend y backend
+- [x] definir `.env.example` para frontend si aplica
+- [x] definir `.env.example` para backend si aplica
 - [ ] eliminar ambigüedad entre variables `REACT_APP_*` y variables de servidor
 
 ### Criterio de salida de Fase 1
 - [ ] frontend corre solo
 - [ ] backend corre solo
-- [ ] existe una forma clara de correr ambos juntos
-- [ ] dependencias quedan separadas por contexto
+- [x] existe una forma clara de correr ambos juntos
+- [x] dependencias quedan separadas por contexto
 
 ---
 
@@ -149,3 +150,7 @@ La prioridad es:
 2. consistencia funcional
 3. modernización
 4. conclusiones
+
+## Nota adicional de implementación
+
+- evitar dependencias auxiliares innecesarias para orquestación del workspace cuando un script bash simple resuelve mejor el arranque conjunto

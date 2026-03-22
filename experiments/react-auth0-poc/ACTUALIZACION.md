@@ -34,6 +34,7 @@ Hoy el proyecto tiene varios problemas de organización y mantenimiento:
 - la estructura del frontend no separa bien páginas, auth, componentes y acceso a API
 - el backend no tiene una estructura clara de respuestas, errores y datos mock
 - hay partes del proyecto con estilo viejo de CRA / React Router clásico
+- frontend y backend todavía no están físicamente separados en carpetas independientes
 
 Nada de esto invalida la PoC, pero sí hace más difícil mantenerla y evolucionarla.
 
@@ -90,6 +91,7 @@ react-auth0-poc/
 
 ### `scripts/`
 - scripts auxiliares para levantar todo junto si hace falta
+- evitar dependencias de orquestación como `npm-run-all` cuando un script bash explícito alcanza
 
 ---
 
@@ -108,6 +110,7 @@ Esto implica que:
 - frontend tendrá sus dependencias propias
 - backend tendrá sus dependencias propias
 - el arranque conjunto será un agregado, no el único camino posible
+- se evitará depender de `npm-run-all`; el arranque conjunto debería resolverse con un script bash propio o un mecanismo igual de explícito
 
 ---
 
@@ -176,6 +179,7 @@ La actualización debe separar mejor la configuración entre frontend y backend.
 - frontend con variables propias de cliente
 - backend con variables propias de servidor
 - eliminar ambigüedad entre configuraciones compartidas
+- evitar archivo `.env` único en la raíz si ya existen contextos separados
 
 ## Resultado esperado
 

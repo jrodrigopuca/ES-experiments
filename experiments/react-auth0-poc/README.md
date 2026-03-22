@@ -21,16 +21,18 @@ Validar un flujo de autenticación/autorización con React + Auth0 + una API Exp
 - `jwks-rsa`
 
 ## Cómo correrlo
-1. instalar dependencias:
+1. instalar dependencias de cada parte:
 
 ```bash
-npm install
+npm --prefix frontend install
+npm --prefix backend install
 ```
 
-2. copiar el archivo de ejemplo y completar valores reales:
+2. copiar los archivos de ejemplo y completar valores reales:
 
 ```bash
-cp .env.example .env
+cp frontend/.env.example frontend/.env
+cp backend/.env.example backend/.env
 ```
 
 3. configurar Auth0:
@@ -46,11 +48,23 @@ cp .env.example .env
 npm start
 ```
 
+### Arranque por separado
+
+```bash
+npm --prefix frontend run start
+npm --prefix backend run start
+```
+
 ### Puertos esperados
 - frontend CRA: `http://localhost:3000`
 - API Express: `http://localhost:3001`
 
 ## Variables de entorno
+
+Durante esta Fase 1, cada parte ya tiene su propio archivo de ejemplo:
+
+- `frontend/.env.example`
+- `backend/.env.example`
 
 ### Frontend
 - `REACT_APP_AUTH0_DOMAIN`
@@ -69,6 +83,15 @@ El backend mantiene fallback a:
 - `REACT_APP_JWKS`
 
 para no romper setups previos del proyecto.
+
+## Estructura actual
+
+```text
+react-auth0-poc/
+  frontend/
+  backend/
+  scripts/
+```
 
 ## Qué prueba esta PoC
 - login con Auth0 desde SPA
