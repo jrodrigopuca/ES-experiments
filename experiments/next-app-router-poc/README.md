@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# next-app-router-poc
 
-## Getting Started
+## Objetivo
+Validar una app Next.js moderna usando App Router y dejar una base para probar routing, páginas dinámicas y variantes de renderizado.
 
-First, run the development server:
+## Pregunta que responde
+¿La estructura App Router de Next.js sirve como base para experimentar con rutas, páginas dinámicas y pruebas de navegación en un proyecto chico?
 
+## Tipo
+- frontend
+
+## Stack
+- Next.js
+- React
+- TypeScript
+
+## Cómo correrlo
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Qué prueba esta PoC
+- App Router
+- layout raíz
+- rutas como `about`, `episodes`, `external`
+- ruta dinámica en `episodes/[id]`
+- páginas de exploración como `amphyb` y `ampweb`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Criterio de éxito
+- la app levanta con `next dev`
+- las rutas principales renderizan
+- la ruta dinámica responde con un id válido
+- sirve como base para seguir comparando features de Next
 
-## Learn More
+## Resultado actual
+- PoC activa con varias rutas ya creadas
+- mezcla base de starter con exploraciones propias
+- la home sigue siendo bastante mínima
 
-To learn more about Next.js, take a look at the following resources:
+## Contexto histórico
+- `log.md` documenta la evolución del experimento
+- hubo una migración desde una estructura más vieja de Next hacia una más nueva
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Próximos pasos
+- documentar qué ruta existe para qué prueba
+- aclarar qué features siguen vigentes y cuáles fueron experimentos puntuales
+- agregar una conclusión concreta sobre App Router vs estructura anterior

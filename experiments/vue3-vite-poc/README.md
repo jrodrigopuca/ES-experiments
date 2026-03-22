@@ -1,46 +1,43 @@
-# hiVue
+# vue3-vite-poc
 
-This template should help get you started developing with Vue 3 in Vite.
+## Objetivo
+Validar una base de Vue 3 con Vite, TypeScript y Vue Router para experimentar con una SPA simple.
 
-## Recommended IDE Setup
+## Pregunta que responde
+¿Vue 3 + Vite ofrece una base liviana y clara para montar una SPA chica con routing y componentes iniciales?
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Tipo
+- frontend
 
-## Type Support for `.vue` Imports in TS
+## Stack
+- Vue 3
+- Vite
+- TypeScript
+- Vue Router
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
+## Cómo correrlo
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Qué prueba esta PoC
+- bootstrap de Vue con Vite
+- uso de `vue-router`
+- vistas `Home` y `About`
+- estructura inicial de componentes
 
-```sh
-npm run build
-```
+## Criterio de éxito
+- la app levanta con Vite
+- la navegación entre rutas funciona
+- la base queda lista para seguir comparando Vue frente a otras opciones
 
-### Lint with [ESLint](https://eslint.org/)
+## Resultado actual
+- PoC funcional como base inicial
+- todavía conserva bastante del template original
+- ya tiene personalización mínima en componentes, router y vistas
 
-```sh
-npm run lint
-```
+## Próximos pasos
+- documentar qué parte del código es template y qué parte es exploración propia
+- definir una hipótesis más concreta para la comparación con otras PoCs
+- agregar conclusión corta sobre DX, routing y estructura
