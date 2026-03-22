@@ -10,10 +10,10 @@ const checkJwt = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: process.env.REACT_APP_JWKS
+        jwksUri: process.env.AUTH0_JWKS_URI || process.env.REACT_APP_JWKS
     }),
-    audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-    issuer: process.env.REACT_APP_AUTH0_DOMAIN_HTTPS,
+    audience: process.env.AUTH0_AUDIENCE || process.env.REACT_APP_AUTH0_AUDIENCE,
+    issuer: process.env.AUTH0_ISSUER || process.env.REACT_APP_AUTH0_DOMAIN_HTTPS,
     algorithms: ['RS256']
 });
 
@@ -60,4 +60,4 @@ app.get('/admin', checkJwt, checkRole('admin'), (req, res) => {
 
 
 app.listen(3001);
-console.log("API en " + process.env.REACT_APP_AUTH0_AUDIENCE);
+console.log("API en " + (process.env.AUTH0_AUDIENCE || process.env.REACT_APP_AUTH0_AUDIENCE));

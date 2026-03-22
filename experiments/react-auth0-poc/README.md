@@ -27,19 +27,48 @@ Validar un flujo de autenticación/autorización con React + Auth0 + una API Exp
 npm install
 ```
 
-2. configurar variables de entorno necesarias para Auth0 en cliente y API, por ejemplo:
-- `REACT_APP_AUTH0_DOMAIN`
-- `REACT_APP_AUTH0_CLIENT_ID`
-- `REACT_APP_AUTH0_CALLBACK_URL`
-- `REACT_APP_AUTH0_AUDIENCE`
-- `REACT_APP_AUTH0_DOMAIN_HTTPS`
-- `REACT_APP_JWKS`
+2. copiar el archivo de ejemplo y completar valores reales:
 
-3. arrancar la PoC:
+```bash
+cp .env.example .env
+```
+
+3. configurar Auth0:
+- crear una aplicación SPA
+- crear o identificar un API con audience propia
+- definir callback URL: `http://localhost:3000/callback`
+- definir logout URL / return URL: `http://localhost:3000`
+- si querés probar `/admin`, emitir también el rol `admin` en el token
+
+4. arrancar cliente + API:
 
 ```bash
 npm start
 ```
+
+### Puertos esperados
+- frontend CRA: `http://localhost:3000`
+- API Express: `http://localhost:3001`
+
+## Variables de entorno
+
+### Frontend
+- `REACT_APP_AUTH0_DOMAIN`
+- `REACT_APP_AUTH0_CLIENT_ID`
+- `REACT_APP_AUTH0_CALLBACK_URL`
+- `REACT_APP_AUTH0_AUDIENCE`
+
+### Backend
+- `AUTH0_ISSUER`
+- `AUTH0_AUDIENCE`
+- `AUTH0_JWKS_URI`
+
+### Compatibilidad con convención vieja
+El backend mantiene fallback a:
+- `REACT_APP_AUTH0_DOMAIN_HTTPS`
+- `REACT_APP_JWKS`
+
+para no romper setups previos del proyecto.
 
 ## Qué prueba esta PoC
 - login con Auth0 desde SPA
@@ -64,12 +93,12 @@ npm start
 ## Resultado actual
 - PoC con bastante lógica implementada tanto en cliente como en API
 - buena base para experimentar auth en SPA + backend
-- depende de configuración externa de Auth0 para ser usable de punta a punta
+- funcional, pero todavía con algunas decisiones de normalización pendientes
 
 ## Limitaciones actuales
-- no se encontró archivo `.env` en el proyecto
-- `package.json` usa `run-p` en el script `start`, pero esa dependencia no está declarada explícitamente en `package.json`
-- parte del conocimiento conceptual previo quedó mezclado en la historia del proyecto y no sólo en la PoC operativa
+- el proyecto sigue usando un enfoque clásico con `auth0-js`
+- la autorización de `/admin` está reforzada en backend; frontend todavía no modela rol `admin` explícitamente
+- falta una conclusión comparativa final respecto a la futura PoC JWT genérica
 
 ## Notas de implementación
 - `src/Auth/Auth.js` maneja login, callback, sesión, scopes y renovación de token
@@ -77,7 +106,7 @@ npm start
 - el experimento está orientado a Auth0 clásico con `auth0-js`
 
 ## Próximos pasos
-- agregar `.env.example`
-- corregir o declarar explícitamente la dependencia para `run-p`
-- documentar setup de Auth0 paso a paso
-- dejar una conclusión concreta sobre si esta estrategia sigue siendo válida o conviene modernizarla
+- decidir si el frontend también debe modelar rol `admin`
+- documentar setup mínimo del claim/rol `admin` en Auth0
+- comparar esta PoC con `spa-api-jwt-auth-poc`
+- dejar una conclusión concreta sobre cuándo conviene proveedor gestionado vs JWT genérica
