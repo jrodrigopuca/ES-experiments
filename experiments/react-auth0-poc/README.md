@@ -133,3 +133,11 @@ react-auth0-poc/
 - documentar setup mínimo del claim/rol `admin` en Auth0
 - comparar esta PoC con `spa-api-jwt-auth-poc`
 - dejar una conclusión concreta sobre cuándo conviene proveedor gestionado vs JWT genérica
+
+## Estado de avance
+
+Para retomar el trabajo de esta PoC en otra sesión, revisar:
+
+- `ACTUALIZACION.md`
+- `TAREAS.md`
+- `ESTADO-ACTUAL.md`
