@@ -173,6 +173,7 @@ La documentación de estado actual y la propuesta de limpieza están en:
 - `docs/repository-status/README.md`
 - `docs/repository-status/repo-cleanup-proposal.md`
 - `docs/repository-status/reorganization-plan.md`
+- `docs/experiments-rules.md`
 
 ---
 
