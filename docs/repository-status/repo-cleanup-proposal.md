@@ -89,7 +89,7 @@ Estas carpetas sí encajan con la idea de experimentación:
 ### `api-productos/`
 - Motivo: demo técnica concreta de API Express.
 - Acción: **mantener**.
-- Recomendación: moverla a una carpeta de experimentos activos o de backend.
+- Recomendación: moverla a `experiments/` con un nombre que refleje mejor su objetivo.
 
 ### `hinext/`
 - Motivo: exploración de Next.js.
@@ -164,15 +164,13 @@ ES-experiments/
   docs/
     repository-status/
   experiments/
-    backend/
-      api-productos-crud-poc/
-      sequelize-mysql-poc/
-    frontend/
-      next-app-router-poc/
-      vue3-vite-poc/
-      malina-starter-poc/
-    security/
-      react-auth0-poc/
+    api-productos-crud-poc/
+    sequelize-mysql-poc/
+    next-app-router-poc/
+    vue3-vite-poc/
+    malina-starter-poc/
+    react-auth0-poc/
+    fullstack-auth-flow-poc/
   archive/
     deprecated/
       ...
@@ -184,6 +182,7 @@ ES-experiments/
 - `archive/` = experimentos viejos que no querés borrar todavía
 - afuera de este repo = material educativo puro
 - nombres con sufijo `-poc/` = fuerzan a declarar intención y evitar carpetas ambiguas
+- no se separa primero por frontend/backend porque la unidad organizativa principal es la PoC completa
 
 ---
 
@@ -202,6 +201,9 @@ Validar...
 
 ## Stack
 - ...
+
+## Tipo
+- frontend / backend / full-stack / tooling / security / integración
 
 ## Cómo correrlo
 - ...
@@ -232,9 +234,7 @@ Cambios de bajo riesgo:
    - qué no entra al repo
    - qué se considera PoC válida
 3. crear una convención de carpetas:
-   - `experiments/frontend`
-   - `experiments/backend`
-   - `experiments/security`
+   - `experiments/<nombre-del-poc>`
    - `archive/`
 
 ### Resultado esperado
@@ -292,9 +292,9 @@ learning-lab/
 ```text
 ES-experiments/
   experiments/
-    frontend/
-    backend/
-    security/
+    <poc-1>/
+    <poc-2>/
+    <poc-3>/
 ```
 
 Y listo. Mucho más coherente.

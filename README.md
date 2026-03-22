@@ -73,9 +73,9 @@ ES-experiments/
   docs/
     repository-status/
   experiments/
-    frontend/
-    backend/
-    security/
+    <poc-1>/
+    <poc-2>/
+    <poc-3>/
   archive/
 ```
 
@@ -84,6 +84,17 @@ ES-experiments/
 - `experiments/`: PoCs activas o vigentes
 - `archive/`: experimentos viejos que se conservan como referencia
 - `docs/repository-status/`: documentación de estado, orden y limpieza del repo
+
+No se separa primero por frontend/backend/security porque una PoC puede ser:
+
+- frontend
+- backend
+- full-stack
+- auth
+- tooling
+- integración
+
+La unidad principal de organización acá es la **PoC**, no la capa técnica.
 
 ---
 
@@ -96,6 +107,7 @@ Idealmente, cada carpeta nueva debería tener un nombre que ya explique intenci�
 - `api-productos-crud-poc`
 - `sequelize-mysql-poc`
 - `react-auth0-poc`
+- `fullstack-auth-flow-poc`
 
 La idea es evitar nombres ambiguos o demasiado genéricos.
 
@@ -116,6 +128,9 @@ Validar...
 
 ## Stack
 - ...
+
+## Tipo
+- frontend / backend / full-stack / tooling / security / integración
 
 ## Cómo correrlo
 - ...
