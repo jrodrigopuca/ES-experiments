@@ -1,3 +1,0 @@
-nxp create-malina hiMalina
-npm run dev
-
