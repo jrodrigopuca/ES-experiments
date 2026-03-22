@@ -2,6 +2,8 @@
 
 Levantamiento rápido del repositorio `ES-experiments` al 2026-03-21.
 
+> Nota de vigencia: este relevamiento describe el estado funcional y conceptual de las carpetas analizadas antes de la reorganización física del repo hacia `experiments/` y `archive/`. Para ver el criterio nuevo de estructura, revisar el `README.md` raíz y `docs/repository-status/reorganization-plan.md`.
+
 ## Cómo leer este relevamiento
 
 - **Activo / funcional**: hay estructura clara, archivos principales y parece ejecutable.
